@@ -6,15 +6,15 @@ import android.os.Bundle;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
-public class Fertilizing extends AppCompatActivity {
+public class Insecticide extends AppCompatActivity {
 
-    PDFView fertilizingPdf;
+    PDFView insecticidePdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fertilizing);
+        setContentView(R.layout.activity_insecticide);
 
-        fertilizingPdf = (PDFView) findViewById(R.id.FertlizingPdf);
-        fertilizingPdf.fromAsset("Demo.pdf").load();
+        insecticidePdf = (PDFView) findViewById(R.id.InsecticidePdf);
+        insecticidePdf.fromAsset("Insecticide.pdf").load();
     }
 }

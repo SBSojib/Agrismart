@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Agrismart</string>
-    <string name="FertilizationPageTitle">Fertilizing</string>
+    <string name="FertilizingButton">Fertilizing</string>
+    <string name="InsecticideButton">Insecticide</string>
+    <string name="ProgressButton">Progress</string>
+    <string name="NewTechnologyButton">New Tech</string>
+    <string name="MarketPriceButton">Market Price</string>
 </resources>
