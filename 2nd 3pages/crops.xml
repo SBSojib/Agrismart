@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
+
+
+
+    <TextView
+        android:id="@+id/WeatherText"
+        android:textSize="30sp"
+        android:layout_alignParentLeft="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Weather:" />
+
+
+    <TextView
+        android:id="@+id/SelectCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/WeatherText"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="Select Crop "
+        android:textSize="60sp" />
+
+    <Button
+        android:id="@+id/RiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SelectCrop"
+        android:layout_centerHorizontal="true"
+        android:text="1.Rice"
+        android:textSize="@android:dimen/app_icon_size"
+        android:layout_marginTop="120dp"/>
+    <Button
+        android:id="@+id/PotatoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RiceButton"
+        android:layout_centerHorizontal="true"
+        android:text="2.Potato"
+        android:textSize="@android:dimen/app_icon_size"/>
+    <Button
+        android:id="@+id/BananaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PotatoButton"
+        android:layout_centerHorizontal="true"
+        android:text="3.Banana"
+        android:textSize="@android:dimen/app_icon_size" />
+
+
+
+</RelativeLayout>
