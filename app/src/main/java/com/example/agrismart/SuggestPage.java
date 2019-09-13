@@ -18,7 +18,7 @@ public class SuggestPage extends AppCompatActivity {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SuggestPage.this, RegisterCrops.class));
+                startActivity(new Intent(SuggestPage.this, SuggestedCropList.class));
             }
         });
         Button next2 = (Button) findViewById(R.id.allCrops);

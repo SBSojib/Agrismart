@@ -34,6 +34,8 @@ public class RegisterCrops extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
+                startActivity(new Intent(RegisterCrops.this, MyCrops.class));
                 ArrayList selected = new ArrayList();
 
 

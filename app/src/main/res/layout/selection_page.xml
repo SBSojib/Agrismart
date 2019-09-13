@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Selection"
+        android:text="Register"
         android:textSize="35dp"
         android:gravity="center"
         android:textColor="@android:color/white"
