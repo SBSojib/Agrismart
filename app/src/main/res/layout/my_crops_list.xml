@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/earthybackground">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/MyCrops"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:entries="@array/crops" >
+    </ListView>
+
+
+
+
+
+</RelativeLayout>

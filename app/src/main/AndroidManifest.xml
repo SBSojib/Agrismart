@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlantDescription"></activity>
+        <activity android:name=".Extra"></activity>
+        <activity android:name=".RegisterCrops" />
+        <activity android:name=".MyCrops" />
+        <activity android:name=".PlantDescription" />
         <activity android:name=".SelectionPage" />
         <activity android:name=".SuggestPage" />
         <activity android:name=".MarketPrice" />

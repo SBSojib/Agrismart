@@ -1,9 +1,23 @@
 <resources>
-    <string name="app_name">Agrismart</string>
+    <array name="crops">
+        <item>Potato</item>
+        <item>Tomato</item>
+        <item>Rice</item>
+        <item>Wheat</item>
+        <item>Corn</item>
+    </array>
     <string name="FertilizingButton">Fertilizing</string>
     <string name="InsecticideButton">Insecticide</string>
     <string name="ProgressButton">Progress</string>
     <string name="NewTechnologyButton">New Tech</string>
     <string name="MarketPriceButton">Market Price</string>
     <string name="Potato">Potato</string>
+    <string name="Tomato">Tomato</string>
+    <string name="Rice">Rice</string>
+    <string name="Wheat">Wheat</string>
+    <string name="Corn">Corn</string>
+    <string name="MyCrops">My Crops</string>
+    <string name="app_name">Agrismart</string>
+    <string name="register_crops">Regsiter Crops</string>
+    <string name="Extra">Extra</string>
 </resources>

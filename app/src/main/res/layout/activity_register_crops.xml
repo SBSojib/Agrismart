@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/earthybackground">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_crops"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"
+        android:textSize="40dp">
+
+    </TextView>
+
+    <CheckBox
+        android:id="@+id/potatoCheckBox"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
+
+        android:layout_marginTop="150dp"
+        android:text="@string/Potato"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:textSize="25dp"
+        />
+    <CheckBox
+        android:id="@+id/tomatoCheckBox"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
+
+        android:layout_marginTop="230dp"
+        android:text="@string/Tomato"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:textSize="25dp"
+        />
+    <CheckBox
+        android:id="@+id/riceCheckBox"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
+
+        android:layout_marginTop="300dp"
+        android:text="@string/Rice"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:textSize="25dp"
+        />
+    <CheckBox
+        android:id="@+id/wheatCheckBox"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
+
+        android:layout_marginTop="370dp"
+        android:text="@string/Wheat"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:textSize="25dp"
+        />
+    <CheckBox
+        android:id="@+id/cornCheckBox"
+        android:layout_width="168dp"
+        android:layout_height="46dp"
+
+        android:layout_marginTop="430dp"
+        android:text="@string/Corn"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:textSize="25dp"
+        />
+    <Button
+        android:id="@+id/confirmCrops"
+        android:layout_width="179dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="590dp"
+        android:background="@drawable/rounded_button"
+        android:textSize="35dp"
+        android:text="COnfirm"
+        android:layout_centerHorizontal="true"
+    />
+
+</RelativeLayout>
+
