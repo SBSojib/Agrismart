@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+   >
+
+    <TextView
+        android:id="@+id/CropNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="45sp"
+        android:text="Crop's Name"
+        />
+
+    <TextView
+        android:id="@+id/PlantingDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CropNameText"
+        android:layout_marginTop="120dp"
+        android:layout_alignParentLeft="true"
+        android:textSize="35sp"
+        android:text="Planting Date: "
+        />
+
+    <TextView
+        android:id="@+id/CultivationAreaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/PlantingDateText"
+        android:text="Cultivation Area: "
+        android:textSize="35sp"
+        android:layout_alignParentLeft="true"/>
+
+    <EditText
+        android:id="@+id/EditPlantingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/CropNameText"
+        android:layout_marginTop="120dp"
+        android:inputType="date"
+        android:hint="dd/mm/yyyy"
+        android:textSize="30sp"
+        android:layout_toRightOf="@+id/PlantingDateText" />
+
+    <EditText
+        android:id="@+id/EditCultivationArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/PlantingDateText"
+        android:layout_marginTop="30dp"
+        android:hint="District"
+        android:textSize="30sp"
+        android:layout_toRightOf="@+id/CultivationAreaText"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/CultivationAreaText"
+        android:layout_marginTop="250dp"
+        android:text="Done"
+        android:textSize="30sp"/>
+
+</RelativeLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/earthybackground">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/Extra"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
+
+
+    <Button
+        android:id="@+id/fertilizingButton"
+        android:text="Fertilizer"
+        android:textSize="20dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="170dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-black"/>
+    <Button
+        android:id="@+id/insecticideButton"
+        android:text="Insecticide"
+        android:textSize="20dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="270dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-black"/>
+
+    <Button
+        android:id="@+id/progressButton"
+        android:layout_width="248dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="600dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-black"
+        android:text="Progress"
+        android:textSize="20dp" />
+    <Button
+        android:id="@+id/marketpriceButon"
+        android:text="Market Price"
+        android:textSize="20dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="380dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-black"/>
+
+    <Button
+        android:id="@+id/newtechButton"
+        android:text="New Technology"
+        android:textSize="20dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="485dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif-black"
+        />
+
+
+
+</RelativeLayout>
