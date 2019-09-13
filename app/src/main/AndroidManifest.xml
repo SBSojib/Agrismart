@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agrismart">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Extra"></activity>
         <activity android:name=".RegisterCrops" />
         <activity android:name=".MyCrops" />
+  
+        <activity android:name=".SuggestedCropList">
+
         <activity android:name=".PlantDescription" />
         <activity android:name=".SelectionPage" />
         <activity android:name=".SuggestPage" />
