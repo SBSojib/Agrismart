@@ -34,6 +34,7 @@ public class SuggestedCropList extends AppCompatActivity {
         button = (Button) findViewById(R.id.LocationButton);
         textView = (TextView) findViewById(R.id.CityNameTextView);
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

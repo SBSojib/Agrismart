@@ -88,7 +88,7 @@
         android:layout_marginTop="450dp"
         android:background="@drawable/rounded_button"
         android:textSize="25dp"
-        android:text="COnfirm"
+        android:text="Next"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-black"
     />
