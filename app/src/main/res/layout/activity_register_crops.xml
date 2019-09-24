@@ -7,13 +7,14 @@
     <TextView
         android:id="@+id/tv1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="All Crops"
         android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="1dp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:fontFamily="sans-serif-black"
-        android:textSize="40dp">
+        android:textSize="25dp">
 
     </TextView>
 
@@ -78,16 +79,17 @@
         android:text="@string/Corn"
         android:layout_centerHorizontal="true"
         android:background="@android:color/white"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:backgroundTint="@android:color/holo_green_dark"
         />
     <Button
         android:id="@+id/confirmCrops"
-        android:layout_width="179dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="450dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/rounded_button"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:text="Next"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-black"

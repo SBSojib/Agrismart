@@ -4,36 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuggestedCropList"
-    android:background="@drawable/earthybackground">
+    tools:context=".SuggestedCropList">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coordinates"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"/>
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:text="Location"
         android:textSize="25dp"
-        android:text="Get Location"
-        android:id="@+id/LocationButton"
-
         />
 
-    <TextView
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="City Name"
-        android:id="@+id/CityNameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:text="Update"
         android:textSize="25dp"
-        android:layout_centerInParent="true"
-        android:layout_above="@+id/LocationButton"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I am Debuging"
-        android:id="@+id/CityNameTextView2"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"
-        android:layout_above="@+id/CityNameTextView"
         />
 
 </RelativeLayout>
