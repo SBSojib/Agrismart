@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="40dp"
+        android:textSize="25dp"
         android:text="Get Location"
         android:id="@+id/LocationButton"
 
@@ -22,9 +22,18 @@
         android:layout_height="wrap_content"
         android:text="City Name"
         android:id="@+id/CityNameTextView"
-        android:textSize="40dp"
+        android:textSize="25dp"
         android:layout_centerInParent="true"
         android:layout_above="@+id/LocationButton"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am Debuging"
+        android:id="@+id/CityNameTextView2"
+        android:textSize="25dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/CityNameTextView"
         />
 
 </RelativeLayout>

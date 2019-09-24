@@ -25,6 +25,7 @@ public class SuggestedCropList extends AppCompatActivity {
 
     Button button;
     TextView textView;
+    TextView textView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class SuggestedCropList extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.LocationButton);
         textView = (TextView) findViewById(R.id.CityNameTextView);
+        textView2 = (TextView) findViewById(R.id.CityNameTextView2);
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +50,8 @@ public class SuggestedCropList extends AppCompatActivity {
                     try {
                         String city = hereLocation(location.getLatitude(), location.getLongitude());
                         textView.setText(city);
+                        textView2.setText("I am Here");
+
                     }
                     catch (Exception e) {
                         e.printStackTrace();
@@ -65,6 +69,7 @@ public class SuggestedCropList extends AppCompatActivity {
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                     Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    //Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     try {
                         String city = hereLocation(location.getLatitude(), location.getLongitude());
                         textView.setText(city);
@@ -82,14 +87,16 @@ public class SuggestedCropList extends AppCompatActivity {
     }
 
     private String hereLocation (double lat, double lon) {
-        String cityName = "";
+        String cityName = "Searching...";
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
-        List<Address> addresses;
+        List<Address> addresses=null;
         try {
-            addresses = geocoder.getFromLocation(lat, lon, 10);
+            addresses = geocoder.getFromLocation(lat, lon, 1);
+            //cityName = "S";
             if(addresses.size() > 0) {
+                //cityName = "We are Here";
                 for(Address adr: addresses) {
                     if(adr.getLocality() != null && adr.getLocality().length() > 0) {
                         cityName = adr.getLocality();
