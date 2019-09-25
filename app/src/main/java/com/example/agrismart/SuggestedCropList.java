@@ -21,6 +21,9 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationListener;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import static com.google.android.gms.common.api.GoogleApiClient.*;
 
 public class SuggestedCropList extends AppCompatActivity implements ConnectionCallbacks,
@@ -38,6 +41,9 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     private static int UPDATE_INTERVAL = 5000; // SEC
     private static int FATEST_INTERVAL = 3000; // SEC
     private static int DISPLACEMENT = 10; // METERS
+
+    int lat=0;
+    int lon=0;
 
 
     @Override
@@ -60,8 +66,18 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         setContentView(R.layout.activity_suggested_crop_list);
 
         txtCoordinates = (TextView) findViewById(R.id.textView);
-        btnGetCoordinates = (Button) findViewById(R.id.button);
-        btnLocationUpdates = (Button) findViewById(R.id.button2);
+        //btnGetCoordinates = (Button) findViewById(R.id.button);
+        //btnLocationUpdates = (Button) findViewById(R.id.button2);
+
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
+        TextView textViewDate = (TextView) findViewById(R.id.textView2);
+        String month="";
+        for(int i=0; ;i++) {
+            if(currentDate.charAt(i) == '/') break;
+            month += currentDate.charAt(i);
+        }
+        textViewDate.setText(month);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -77,7 +93,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             }
         }
 
-        btnGetCoordinates.setOnClickListener(new View.OnClickListener() {
+        /*btnGetCoordinates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 displayLocation();
@@ -89,7 +105,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 tooglePeriodicLoctionUpdates();
             }
         });
-
+*/
     }
 
 
@@ -117,13 +133,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     private void tooglePeriodicLoctionUpdates() {
         if(!mRequestingLocationUpdates)
         {
-            btnLocationUpdates.setText("Stop location update");
+            //btnLocationUpdates.setText("Stop location update");
             mRequestingLocationUpdates = true;
             startLocationUpdates();
         }
         else
         {
-            btnLocationUpdates.setText("Start location update");
+            //btnLocationUpdates.setText("Start location update");
             mRequestingLocationUpdates = false;
             stopLocationUpdates();
         }
@@ -139,9 +155,14 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         if (mLastLocation != null) {
             double latitude = mLastLocation.getLatitude();
             double longitude = mLastLocation.getLongitude();
-            txtCoordinates.setText(latitude + " / " + longitude);
-        } else
-            txtCoordinates.setText("Couldn't get the location. Make sure location is enable on the device");
+            lat = (int)latitude;
+            lon = (int)longitude;
+            txtCoordinates.setText(lat + " / " + lon);
+        } else {
+            lat = 0;
+            lon = 0;
+            txtCoordinates.setText(lat+" / "+lon);
+        }
 
     }
 
@@ -194,6 +215,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        tooglePeriodicLoctionUpdates();
         displayLocation();
         if(mRequestingLocationUpdates)
             startLocationUpdates();

@@ -15,24 +15,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"/>
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:text="Location"
+        android:text="Date"
         android:textSize="25dp"
-        />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:text="Update"
-        android:textSize="25dp"
-        />
+        android:layout_marginTop="300dp"/>
 
 </RelativeLayout>
