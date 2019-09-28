@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "644281507807",
+    "firebase_url": "https://agrismart-cf8ee.firebaseio.com",
+    "project_id": "agrismart-cf8ee",
+    "storage_bucket": "agrismart-cf8ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644281507807:android:73e0f59dd6722122abae6a",
+        "android_client_info": {
+          "package_name": "com.example.agrismart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644281507807-3ld1sohmm8k5hli38mii9j150ljqbd4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agrismart",
+            "certificate_hash": "7be38d79e386a72d4d0110ab4541d9e9ab81aeba"
+          }
+        },
+        {
+          "client_id": "644281507807-m47er3l40nr80tsfeemnj1edracob124.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCviVNKrr8KxigeA5hlwmVZgHjxLQH6v2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644281507807-m47er3l40nr80tsfeemnj1edracob124.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
