@@ -1,99 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/earthybackground">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
     <TextView
-        android:id="@+id/tv1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="All Crops"
-        android:background="@color/colorPrimaryDark"
-        android:layout_marginTop="1dp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:fontFamily="sans-serif-black"
-        android:textSize="25dp">
-
-    </TextView>
-
-    <CheckBox
-        android:id="@+id/potatoCheckBox"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
-
-        android:layout_marginTop="100dp"
-        android:text="@string/Potato"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:textSize="25dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        />
-        />
-    <CheckBox
-        android:id="@+id/tomatoCheckBox"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
-
-        android:layout_marginTop="150dp"
-        android:text="@string/Tomato"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:textSize="25dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        />
-        />
-    <CheckBox
-        android:id="@+id/riceCheckBox"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
-
-        android:layout_marginTop="200dp"
-        android:text="@string/Rice"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:textSize="25dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        />
-        />
-    <CheckBox
-        android:id="@+id/wheatCheckBox"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
-
-        android:layout_marginTop="250dp"
-        android:text="@string/Wheat"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:textSize="25dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        />
-        />
-    <CheckBox
-        android:id="@+id/cornCheckBox"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
-
-        android:layout_marginTop="300dp"
-        android:text="@string/Corn"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"
-        android:textSize="20dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        />
-    <Button
-        android:id="@+id/confirmCrops"
-        android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:background="@color/colorPrimaryDark"
+    android:text="CHOOSE"
+    android:textSize="35dp"
+    android:gravity="center"
+    android:textColor="@android:color/white"
+    android:fontFamily="sans-serif-black"/>
+    <ListView
+        android:id="@+id/list1"
+        android:cacheColorHint="#00000000"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:soundEffectsEnabled="true"
+        android:dividerHeight="1px"
+        android:padding="5dip"
+        android:smoothScrollbar="true"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/rounded_button"
-        android:textSize="20dp"
-        android:text="Next"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="sans-serif-black"
-    />
+        android:drawSelectorOnTop="false"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_weight="1"/>
 
-</RelativeLayout>
 
+</LinearLayout>

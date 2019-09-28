@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationInput"></activity>
+        <activity android:name=".MyAdapter"></activity>
+        <activity android:name=".RegistrationInput" />
         <activity android:name=".Extra" />
         <activity android:name=".RegisterCrops" />
         <activity android:name=".MyCrops" />
@@ -35,6 +36,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

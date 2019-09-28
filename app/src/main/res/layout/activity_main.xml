@@ -7,27 +7,34 @@
     android:background="@drawable/earthybackground">
 
 
-
     <Button
         android:id="@+id/registerCrops"
+
         android:text="Register Crops"
         android:textSize="20dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="250dp"
+
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"/>
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        
 
     <Button
         android:id="@+id/myCrops"
+
         android:text="My Crops"
         android:textSize="20dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="350dp"
+
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
+        android:backgroundTint="#F8F4F4"
         android:fontFamily="sans-serif-black"
         />
 

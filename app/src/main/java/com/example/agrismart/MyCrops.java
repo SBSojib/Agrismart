@@ -1,73 +1,72 @@
 package com.example.agrismart;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyCrops extends AppCompatActivity {
+    ListView listView;
+    List<Crop> list;
+    ProgressDialog progressDialog;
+    private DatabaseReference databaseReference;
+    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_crops_list);
 
-        Button button1 = (Button) findViewById(R.id.button1);
-        Button button2 = (Button) findViewById(R.id.button2);
-        Button button3 = (Button) findViewById(R.id.button3);
-        Button button4 = (Button) findViewById(R.id.button4);
-        Button button5 = (Button) findViewById(R.id.button5);
+        listView = (ListView) findViewById(R.id.list2);
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving...");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("crops");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyCrops.this, Extra.class));
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                list.clear();
+
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    Crop doctor = snap.getValue(Crop.class);
+                    list.add(doctor);
+
+                    myAdapter = new MyAdapter(MyCrops.this,R.layout.items,list);
+                    listView.setAdapter(myAdapter);
+                }
             }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyCrops.this, Extra.class));
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MyCrops.this,Extra.class);
+                Crop c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("doctor",listView.getItemAtPosition(position).toString());
+                startActivity(intent);
             }
         });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyCrops.this, Extra.class));
-            }
-        });
-
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyCrops.this, Extra.class));
-            }
-        });
-
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyCrops.this, Extra.class));
-            }
-        });
-        /*ListView list = (ListView)findViewById(R.id.listView1);
-        List stock_list = getIntent().getStringArrayListExtra("stock_list");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                stock_list);
-
-        list.setAdapter(arrayAdapter);
-    */
     }
 }
-
