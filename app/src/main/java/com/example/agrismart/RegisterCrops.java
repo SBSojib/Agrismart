@@ -1,73 +1,43 @@
 package com.example.agrismart;
 
+
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.view.View;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.CheckBox;
-
-import java.util.ArrayList;
-
 public class RegisterCrops extends AppCompatActivity {
-    CheckBox potato, tomato, rice, wheat, corn;
-    Button confirmOrder;
-
+    ListView listview;
+    Intent intent;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_crops);
-        addListenerOnButtonClick();
+        intent = new Intent(this,RegistrationInput.class);
+        listview = (ListView) findViewById(R.id.list1);
+        String[] names = getResources().getStringArray(R.array.crops);
+        listview = (ListView) findViewById(R.id.list1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(listClick);
     }
+    private AdapterView.OnItemClickListener listClick = new AdapterView.OnItemClickListener(){
+        public void onItemClick(AdapterView Parent, View v,int position,long id){
+            String itm=(String)listview.getItemAtPosition(position);
+            int k = position;
+            intent.putExtra("pos",itm);
 
 
-    public void addListenerOnButtonClick(){
-        potato = (CheckBox)findViewById(R.id.potatoCheckBox);
-        tomato = (CheckBox)findViewById(R.id.tomatoCheckBox);
-        rice = (CheckBox)findViewById(R.id.riceCheckBox);
-        wheat = (CheckBox)findViewById(R.id.wheatCheckBox);
-        corn= (CheckBox)findViewById(R.id.cornCheckBox);
-
-        confirmOrder=(Button)findViewById(R.id.confirmCrops);
-        confirmOrder.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(RegisterCrops.this, RegistrationInput.class));
-                ArrayList selected = new ArrayList();
-
-
-                if (potato.isChecked()) {
-                    selected.add("Potato");
-                }
-                if (tomato.isChecked()) {
-                    selected.add("Tomato");
-                }
-                if (rice.isChecked()) {
-                    selected.add("Rice");
-                }
-                if (wheat.isChecked()) {
-                    selected.add("Wheat");
-                }
-                if (corn.isChecked()) {
-                    selected.add("Corn");
-                }/*
-                Intent intent = new Intent(RegisterCrops.this, MyCrops.class);
-                intent.putStringArrayListExtra("stock_list", selected);
-                startActivity(intent);
-                startActivity(intent);
-    */
-            }
-
-        });
-
-
-
-    }
+            startActivity(intent);
+        }
+    };
 }
-
-
-
-

@@ -13,7 +13,7 @@
         android:layout_height="66dp"
         android:background="@color/colorPrimaryDark"
         android:text="Register"
-        android:textSize="35dp"
+        android:textSize="25dp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:fontFamily="sans-serif-black"/>
@@ -22,10 +22,10 @@
     <Button
         android:id="@+id/registerCrops"
         android:text="Register Crops"
-        android:textSize="24dp"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:layout_marginVertical="255dp"
+        android:textSize="20dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:fontFamily="sans-serif-black"/>
@@ -33,10 +33,10 @@
     <Button
         android:id="@+id/myCrops"
         android:text="My Crops"
-        android:textSize="24dp"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:layout_marginVertical="395dp"
+        android:textSize="20dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="350dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:fontFamily="sans-serif-black"

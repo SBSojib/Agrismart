@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/earthybackground">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="66dp"
@@ -16,85 +12,22 @@
         android:gravity="center"
         android:textColor="@android:color/white"
         android:fontFamily="sans-serif-black"/>
-
-    <!--<ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/list2"
+        android:cacheColorHint="#00000000"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:soundEffectsEnabled="true"
+        android:dividerHeight="1px"
+        android:padding="5dip"
+        android:smoothScrollbar="true"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textAlignment="center"
-        android:entries="@array/crops" >
-    </ListView> -->
+        android:drawSelectorOnTop="false"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_weight="1"/>
 
 
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Rice"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:layout_marginVertical="100dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
-        ></Button>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Potato"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:layout_marginVertical="200dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
-        ></Button>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Banana"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:layout_marginVertical="300dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
-        ></Button>
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Tomato"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:layout_marginVertical="400dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
-        ></Button>
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Corn"
-        android:textSize="25dp"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:layout_marginVertical="500dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
-        ></Button>
-
-
-
-
-
-</RelativeLayout>
+</LinearLayout>
