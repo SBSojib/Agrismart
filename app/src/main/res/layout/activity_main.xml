@@ -20,7 +20,7 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="sans-serif-black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
         
 
     <Button
