@@ -13,7 +13,6 @@
         android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         android:text="Register"
-        android:layout_marginTop="1dp"
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -29,7 +28,10 @@
         android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"/>
+        android:fontFamily="sans-serif-black"
+        android:backgroundTint="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
 
     <Button
         android:id="@+id/allCrops"
@@ -41,6 +43,8 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
         android:fontFamily="sans-serif-black"
+        android:backgroundTint="#FFFFFF"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 
 

@@ -36,6 +36,7 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="#F8F4F4"
         android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
         />
 
 

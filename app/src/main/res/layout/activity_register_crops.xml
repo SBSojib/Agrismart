@@ -5,10 +5,10 @@
     android:layout_height="fill_parent">
     <TextView
     android:layout_width="match_parent"
-    android:layout_height="66dp"
+    android:layout_height="50dp"
     android:background="@color/colorPrimaryDark"
-    android:text="CHOOSE"
-    android:textSize="35dp"
+    android:text="Choose"
+    android:textSize="25dp"
     android:gravity="center"
     android:textColor="@android:color/white"
     android:fontFamily="sans-serif-black"/>
@@ -17,6 +17,7 @@
         android:cacheColorHint="#00000000"
         android:scrollbars="none"
         android:fadingEdge="vertical"
+        android:textAlignment="center"
         android:soundEffectsEnabled="true"
         android:dividerHeight="1px"
         android:padding="5dip"
