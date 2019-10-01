@@ -45,8 +45,8 @@ public class MyCrops extends AppCompatActivity {
                 list.clear();
 
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    Crop doctor = snap.getValue(Crop.class);
-                    list.add(doctor);
+                    Crop c = snap.getValue(Crop.class);
+                    list.add(c);
 
                     myAdapter = new MyAdapter(MyCrops.this,R.layout.items,list);
                     listView.setAdapter(myAdapter);
@@ -63,8 +63,8 @@ public class MyCrops extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MyCrops.this,Extra.class);
                 Crop c=list.get(position);
-                System.out.println(c.getName());
-                intent.putExtra("doctor",listView.getItemAtPosition(position).toString());
+                System.out.println(listView.getItemAtPosition(position).toString());
+                intent.putExtra("crname",c.getName());
                 startActivity(intent);
             }
         });

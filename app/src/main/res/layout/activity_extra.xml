@@ -90,6 +90,7 @@
         />
 
     <TextView
+        android:id="@+id/cropDescrpt"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="300dp"
@@ -99,6 +100,7 @@
         />
 
     <TextView
+        android:id="@+id/weatherDescrpt"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_marginTop="55dp"
