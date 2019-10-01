@@ -125,6 +125,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
 
 */
+
         listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -144,6 +145,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                         list.add(cropName);
                     }
 
+
                     myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
                     listView.setAdapter(myAdapter);
                 }
@@ -162,10 +164,11 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
                 Crop2 c=list.get(position);
                 System.out.println(c.getName());
-                intent.putExtra("cropName",listView.getItemAtPosition(position).toString());
+                intent.putExtra("pos",c.getName());
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -281,7 +284,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             startLocationUpdates();
     }
 
-
+    public void update() {
+        tooglePeriodicLoctionUpdates();
+        displayLocation();
+        if(mRequestingLocationUpdates) {
+            startLocationUpdates();
+        }
+    }
 
     @Override
     public void onConnectionSuspended(int i) {
