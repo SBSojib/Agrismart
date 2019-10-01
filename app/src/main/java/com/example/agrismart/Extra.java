@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Extra extends AppCompatActivity {
 
@@ -48,5 +53,43 @@ public class Extra extends AppCompatActivity {
                 startActivity(new Intent(Extra.this, MarketPrice.class));
             }
         });
+        TextView myTextView = (TextView)findViewById(R.id.cropDescrpt);
+        Intent i = getIntent();
+        String name= i.getStringExtra("crname");
+        InputStream inputStream;
+        if("Potato".equals(name)){
+            inputStream = getResources().openRawResource(R.raw.potato);
+        }
+        else if("Wheat".equals(name)){
+            inputStream = getResources().openRawResource(R.raw.wheat);
+        }
+        else if("Corn".equals(name)){
+            inputStream = getResources().openRawResource(R.raw.corn);
+        }
+        else if("Tomato".equals(name)){
+            inputStream = getResources().openRawResource(R.raw.tomato);
+        }
+        else{
+            inputStream = getResources().openRawResource(R.raw.rice);
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        String myText = "";
+        int in;
+        try {
+            in = inputStream.read();
+            while (in != -1)
+            {
+                byteArrayOutputStream.write(in);
+                in = inputStream.read();
+            }
+            inputStream.close();
+
+            myText = byteArrayOutputStream.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        myTextView.setText(myText);
     }
 }
