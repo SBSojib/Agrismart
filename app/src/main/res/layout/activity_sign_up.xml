@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/earthybackground"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Suggested Crops"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
+    <EditText
+        android:background="@android:color/white"
+        android:id="@+id/regUsernameText"
+
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="154dp"
+        />
+    <EditText
+        android:id="@+id/regPassText"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="284dp"
+        />
+    <Spinner
+        android:id="@+id/adminDecideSpinner"
+        android:background="@android:color/white"
+        android:layout_width="223dp"
+        android:layout_height="47dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="454dp"></Spinner>
+
+    <Button
+        android:text="Sign Up"
+        android:id="@+id/regConfirmButton"
+        android:layout_width="176dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="554dp"
+        ></Button>
+
+</RelativeLayout>
