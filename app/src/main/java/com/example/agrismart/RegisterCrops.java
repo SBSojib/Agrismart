@@ -62,7 +62,7 @@ public class RegisterCrops extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(RegisterCrops.this,Extra.class);
+                Intent intent = new Intent(RegisterCrops.this,RegistrationInput.class);
                 Crop2 c=list.get(position);
                 System.out.println(listView.getItemAtPosition(position).toString());
                 intent.putExtra("crname",c.getName());

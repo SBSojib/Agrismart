@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +37,8 @@ public class MyCrops extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Retreiving...");
         progressDialog.show();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("crops");
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("crops").child(currentuser);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

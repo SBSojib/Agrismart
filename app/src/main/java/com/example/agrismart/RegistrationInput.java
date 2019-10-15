@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,7 +47,7 @@ public class RegistrationInput extends AppCompatActivity {
         spinner4.setAdapter(adapter4);
 
         Intent intent = getIntent();
-        final String name = intent.getStringExtra("pos");
+        final String name = intent.getStringExtra("crname");
         Intent i = new Intent(this,MyCrops.class);
 
         button = (Button) findViewById(R.id.buttonOfConfirmingRegistration);
@@ -64,11 +65,11 @@ public class RegistrationInput extends AppCompatActivity {
                 DatabaseReference mDatabase;
 // ...
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-
+                String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                 Crop crop = new Crop(name,item1[k1],item2[k2],item3[k3],qty,item4[k4]);
-                mDatabase.child("crops").child(name).setValue(crop);
-                startActivity(new Intent(RegistrationInput.this, MainActivity.class));
+                mDatabase.child("crops").child(currentuser).child(name).setValue(crop);
+                ///startActivity(new Intent(RegistrationInput.this, Extra.class));
 
             }
         });
