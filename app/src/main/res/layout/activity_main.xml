@@ -8,9 +8,9 @@
 
 
     <Button
-        android:id="@+id/registerCrops"
+        android:id="@+id/goToSignIn"
 
-        android:text="Register Crops"
+        android:text="LOGIN"
         android:textSize="20dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -24,9 +24,9 @@
 
 
     <Button
-        android:id="@+id/myCrops"
+        android:id="@+id/goToSignUp"
 
-        android:text="My Crops"
+        android:text="Register"
         android:textSize="20dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
