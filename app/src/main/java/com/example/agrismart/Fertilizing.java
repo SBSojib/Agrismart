@@ -1,20 +1,60 @@
 package com.example.agrismart;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
-import com.github.barteksc.pdfviewer.PDFView;
+public class Fertilizing extends Activity {
 
-public class Fertilizing extends AppCompatActivity {
-
-    PDFView fertilizingPdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fertilizing);
+        setContentView(R.layout.activity_plant_description);
 
-        fertilizingPdf = (PDFView) findViewById(R.id.FertlizingPdf);
-        fertilizingPdf.fromAsset("Demo.pdf").load();
+        TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        Intent i =getIntent();
+        final String name = i.getStringExtra("crop");
+
+        InputStream inputStream;
+        if(name.equals("Potato")){
+            inputStream=getResources().openRawResource(R.raw.potato_fert);
+        }
+        else if(name.equals("Tomato")){
+            inputStream=getResources().openRawResource(R.raw.tomato_fert);
+        }
+        else if(name.equals("Rice")){
+            inputStream=getResources().openRawResource(R.raw.rice_fert);
+        }
+        else if(name.equals("Wheat")){
+            inputStream=getResources().openRawResource(R.raw.wheat_fert);
+        }
+        else{
+            inputStream=getResources().openRawResource(R.raw.corn_fert);
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        String myText = "";
+        int in;
+        try {
+            in = inputStream.read();
+            while (in != -1)
+            {
+                byteArrayOutputStream.write(in);
+                in = inputStream.read();
+            }
+            inputStream.close();
+
+            myText = byteArrayOutputStream.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        myTextView.setText(myText);
     }
+
 }

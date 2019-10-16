@@ -2,9 +2,15 @@ package com.example.agrismart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Insecticide extends AppCompatActivity {
 
@@ -12,9 +18,47 @@ public class Insecticide extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insecticide);
+        setContentView(R.layout.activity_plant_description);
 
-        insecticidePdf = (PDFView) findViewById(R.id.InsecticidePdf);
-        insecticidePdf.fromAsset("Insecticide.pdf").load();
+        TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        Intent i =getIntent();
+        final String name = i.getStringExtra("crop");
+
+        InputStream inputStream;
+        if(name.equals("Potato")){
+            inputStream=getResources().openRawResource(R.raw.potato_pest);
+        }
+        else if(name.equals("Tomato")){
+            inputStream=getResources().openRawResource(R.raw.tomato_pest);
+        }
+        else if(name.equals("Rice")){
+            inputStream=getResources().openRawResource(R.raw.rice_pest);
+        }
+        else if(name.equals("Wheat")){
+            inputStream=getResources().openRawResource(R.raw.wheat_pest);
+        }
+        else{
+            inputStream=getResources().openRawResource(R.raw.corn_pest);
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        String myText = "";
+        int in;
+        try {
+            in = inputStream.read();
+            while (in != -1)
+            {
+                byteArrayOutputStream.write(in);
+                in = inputStream.read();
+            }
+            inputStream.close();
+
+            myText = byteArrayOutputStream.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        myTextView.setText(myText);
     }
+
 }

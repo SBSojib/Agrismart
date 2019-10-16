@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical"
+    android:background="@drawable/earthybackground"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent">
 <TextView
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/colorPrimaryDark"
-    android:text="Suggested Crops"
+    android:text="Sign In"
     android:textSize="25dp"
     android:gravity="center"
     android:textColor="@android:color/white"
     android:fontFamily="sans-serif-black"/>
 <EditText
     android:id="@+id/usernameText"
-
-    android:layout_width="270dp"
+    android:hint="E-Mail"
+    android:background="@android:color/white"
+    android:layout_width="320dp"
     android:layout_height="44dp"
     android:layout_centerHorizontal="true"
-    android:layout_marginTop="154dp"
+    android:layout_marginTop="204dp"
     />
 <EditText
+    android:hint="Password"
     android:id="@+id/passText"
-
-    android:layout_width="270dp"
+    android:background="@android:color/white"
+    android:layout_width="320dp"
     android:layout_height="44dp"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="354dp"
     />
 
 <Button
+    android:background="@drawable/rounded_button"
     android:text="Sign In"
     android:id="@+id/signInConfirmButton"
     android:layout_width="176dp"
     android:layout_height="50dp"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="554dp"
+    android:backgroundTint="@android:color/white"
     ></Button>
 
 </RelativeLayout>

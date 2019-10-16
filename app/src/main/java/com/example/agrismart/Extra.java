@@ -18,18 +18,24 @@ public class Extra extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra);
+        Intent i = getIntent();
+        final String name= i.getStringExtra("crname");
         Button next1 = (Button) findViewById(R.id.fertilizingButton);
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, Fertilizing.class));
+                Intent i = new Intent(Extra.this,Fertilizing.class);
+                i.putExtra("crop",name);
+                startActivity(i);
             }
         });
         Button next2 = (Button) findViewById(R.id.insecticideButton);
         next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, Insecticide.class));
+                Intent i = new Intent(Extra.this,Insecticide.class);
+                i.putExtra("crop",name);
+                startActivity(i);
             }
         });
         Button next3 = (Button) findViewById(R.id.newtechButton);
@@ -50,12 +56,13 @@ public class Extra extends AppCompatActivity {
         next5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, MarketPrice.class));
+                Intent i = new Intent(Extra.this,MarketPrice.class);
+                i.putExtra("crop",name);
+                startActivity(i);
             }
         });
         TextView myTextView = (TextView)findViewById(R.id.cropDescrpt);
-        Intent i = getIntent();
-        String name= i.getStringExtra("crname");
+
         InputStream inputStream;
         if("Potato".equals(name)){
             inputStream = getResources().openRawResource(R.raw.potato);
