@@ -143,19 +143,20 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
                 for(DataSnapshot snap: dataSnapshot.getChildren()) {
                     Crop2 cropName = snap.getValue(Crop2.class);
+
                     String s1 = String.valueOf(lat);
                     String s2 = String.valueOf(lon);
                     Log.e("Latitude: ",s1);
                     Log.e("Longitude: ",s2);
 
-                    String slat = String.valueOf((cropName.Latitude));
-                    String slon = String.valueOf(cropName.Longitude);
-                    String smon = String.valueOf(cropName.Month);
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
                     Log.e("fLatitude: ", slat);
                     Log.e("fLongitude: ",slon);
                     Log.e("fMonth: ", smon);
 
-                    if(cropName.Latitude == lat && cropName.Longitude == lon && cropName.Month ==  mon) {
+                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
                         list.add(cropName);
                     }
 

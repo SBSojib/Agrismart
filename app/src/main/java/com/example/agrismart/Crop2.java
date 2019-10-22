@@ -1,37 +1,37 @@
 package com.example.agrismart;
 
 public class Crop2 {
-    String Name = "";
-    int Month = 0;
-    int Latitude = 0;
-    int Longitude = 0;
+    String name = "";
+    int month = 0;
+    int latitude = 0;
+    int longitude = 0;
 
     public Crop2() {
 
     }
 
     public Crop2(String Name,int month, int latitude, int longitude) {
-        this.Month = month;
-        this.Name=Name;
-        this.Latitude = latitude;
-        this.Longitude = longitude;
+        this.month = month;
+        this.name=Name;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public int getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
     public int getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public int getMonth() {
-        return Month;
+        return month;
     }
 
 
