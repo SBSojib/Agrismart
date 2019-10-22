@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -126,6 +127,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
 */
 
+
         listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -141,6 +143,18 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
                 for(DataSnapshot snap: dataSnapshot.getChildren()) {
                     Crop2 cropName = snap.getValue(Crop2.class);
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.Latitude));
+                    String slon = String.valueOf(cropName.Longitude);
+                    String smon = String.valueOf(cropName.Month);
+                    Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);
+
                     if(cropName.Latitude == lat && cropName.Longitude == lon && cropName.Month ==  mon) {
                         list.add(cropName);
                     }
@@ -221,7 +235,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             lat = (int)latitude;
             lon = (int)longitude;
             //txtCoordinates.setText(lat + " / " + lon);
-        } else {
+        }
+        else {
             lat = 0;
             lon = 0;
             //txtCoordinates.setText(lat+" / "+lon);
@@ -284,13 +299,6 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             startLocationUpdates();
     }
 
-    public void update() {
-        tooglePeriodicLoctionUpdates();
-        displayLocation();
-        if(mRequestingLocationUpdates) {
-            startLocationUpdates();
-        }
-    }
 
     @Override
     public void onConnectionSuspended(int i) {
