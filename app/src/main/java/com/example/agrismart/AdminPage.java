@@ -39,8 +39,10 @@ public class AdminPage extends AppCompatActivity {
                 String m= c.getName();
                 mDatabase.child("SuggestedCrops").child(m).setValue(c);
                 Toast.makeText(getApplicationContext(), "Crop Added", Toast.LENGTH_LONG).show();
-                Intent i= new Intent(AdminPage.this,SignIn.class);
-                startActivity(i);
+                et1.getText().clear();
+                et2.getText().clear();
+                et3.getText().clear();
+                et4.getText().clear();
             }
         });
     }
