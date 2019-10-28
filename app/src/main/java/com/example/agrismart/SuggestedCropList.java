@@ -126,7 +126,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
 
 */
-
+        Log.e("LatitudeS", String.valueOf(lat));
+        Log.e("LatitudeS", String.valueOf(lon));
 
         listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
         list = new ArrayList<>();
@@ -152,9 +153,9 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                     String slat = String.valueOf((cropName.latitude));
                     String slon = String.valueOf(cropName.longitude);
                     String smon = String.valueOf(cropName.month);
-                    Log.e("fLatitude: ", slat);
+                    /*Log.e("fLatitude: ", slat);
                     Log.e("fLongitude: ",slon);
-                    Log.e("fMonth: ", smon);
+                    Log.e("fMonth: ", smon);*/
 
                     if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
                         list.add(cropName);
@@ -298,6 +299,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         displayLocation();
         if(mRequestingLocationUpdates)
             startLocationUpdates();
+
     }
 
 
