@@ -110,25 +110,210 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 createLocationRequest();
             }
         }
+        //dataRetrive();
 
-        /*btnGetCoordinates.setOnClickListener(new View.OnClickListener() {
+        //Log.e("LatitudeS", String.valueOf(lat));
+        //Log.e("LatitudeS", String.valueOf(lon));
+/*
+        listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
+        list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
+        databaseReference.addValueEventListener((new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                displayLocation();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                list.clear();
+
+                for(DataSnapshot snap: dataSnapshot.getChildren()) {
+                    Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+                    Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);
+
+                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
+                        list.add(cropName);
+                    }
+
+
+                    myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
+                    listView.setAdapter(myAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
+                Crop2 c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("pos",c.getName());
+                startActivity(intent);
             }
         });
-        btnLocationUpdates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tooglePeriodicLoctionUpdates();
-            }
-        });
-
-
 */
-        Log.e("LatitudeS", String.valueOf(lat));
-        Log.e("LatitudeS", String.valueOf(lon));
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayServices();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mGoogleApiClient != null)
+            mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
+        if(mGoogleApiClient != null)
+            mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    private void tooglePeriodicLoctionUpdates() {
+        if(!mRequestingLocationUpdates)
+        {
+            //btnLocationUpdates.setText("Stop location update");
+            mRequestingLocationUpdates = true;
+            startLocationUpdates();
+        }
+        else
+        {
+            //btnLocationUpdates.setText("Start location update");
+            mRequestingLocationUpdates = false;
+            stopLocationUpdates();
+        }
+    }
+
+
+    private void displayLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            double latitude = mLastLocation.getLatitude();
+            double longitude = mLastLocation.getLongitude();
+            lat = (int)latitude;
+            lon = (int)longitude;
+
+            dataRetrive();
+
+            Log.e("Latitude in Display", String.valueOf(lat));
+            Log.e("Longitude in Diplay", String.valueOf(lon));
+            //txtCoordinates.setText(lat + " / " + lon);
+        }
+        else {
+            lat = 0;
+            lon = 0;
+            //txtCoordinates.setText(lat+" / "+lon);
+        }
+
+
+    }
+
+    private void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+
+    }
+
+    private synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+
+        //Fix first time run app if permission doesn't grant yet so can't get anything
+        mGoogleApiClient.connect();
+
+
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void startLocationUpdates() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
+    }
+
+    private void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        tooglePeriodicLoctionUpdates();
+        displayLocation();
+        //mGoogleApiClient.disconnect();
+        if(mRequestingLocationUpdates) {
+            startLocationUpdates();
+        }
+
+    }
+
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        //displayLocation();
+    }
+
+    public void dataRetrive() {
         listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -184,139 +369,6 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 startActivity(intent);
             }
         });
-
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        checkPlayServices();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(mGoogleApiClient != null)
-            mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
-        if(mGoogleApiClient != null)
-            mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    private void tooglePeriodicLoctionUpdates() {
-        if(!mRequestingLocationUpdates)
-        {
-            //btnLocationUpdates.setText("Stop location update");
-            mRequestingLocationUpdates = true;
-            startLocationUpdates();
-        }
-        else
-        {
-            //btnLocationUpdates.setText("Start location update");
-            mRequestingLocationUpdates = false;
-            stopLocationUpdates();
-        }
-    }
-
-
-    private void displayLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null) {
-            double latitude = mLastLocation.getLatitude();
-            double longitude = mLastLocation.getLongitude();
-            lat = (int)latitude;
-            lon = (int)longitude;
-            //txtCoordinates.setText(lat + " / " + lon);
-        }
-        else {
-            lat = 0;
-            lon = 0;
-            //txtCoordinates.setText(lat+" / "+lon);
-        }
-
-    }
-
-    private void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
-
-    }
-
-    private synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API).build();
-
-        //Fix first time run app if permission doesn't grant yet so can't get anything
-        mGoogleApiClient.connect();
-
-
-    }
-
-    private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_LONG).show();
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
-
-    private void startLocationUpdates() {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
-    }
-
-    private void stopLocationUpdates() {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        tooglePeriodicLoctionUpdates();
-        displayLocation();
-        if(mRequestingLocationUpdates)
-            startLocationUpdates();
-
-    }
-
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mLastLocation = location;
-        displayLocation();
     }
 
 }

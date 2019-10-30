@@ -40,6 +40,16 @@ public class AdminPage extends AppCompatActivity {
         et3= (EditText)findViewById(R.id.crpLon);
         et4= (EditText)findViewById(R.id.crpMon);
 
+        minTemp = (EditText) findViewById(R.id.minTempOfCrop);
+        maxTemp = (EditText) findViewById(R.id.maxTempOfCrop);
+        minHumidity = (EditText) findViewById(R.id.minHumidityOfCrop);
+        maxHimidity = (EditText) findViewById(R.id.maxHumidityOfCrop);
+        fertilizingInterval = (EditText) findViewById(R.id.fertilizingIntervalOfCrop);
+        totalFertilizingTime = (EditText) findViewById((R.id.totalFertiliaztionTimeOfCrop));
+        insecticideInterval = (EditText) findViewById(R.id.insecticideIntervalOfCrop);
+        totalInsecticideTime = (EditText) findViewById(R.id.totalInsecticideTimeOfCrop);
+        cultivationDuration = (EditText) findViewById(R.id.cultivationDurationOfCrop);
+
 
         Button btn = (Button)findViewById(R.id.addcrop);
         btn.setOnClickListener(new View.OnClickListener() {
