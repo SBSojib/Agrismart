@@ -2,14 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agrismart">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
+        android:name=".Notification"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Agrismart"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminPage"></activity>
+        <activity
+            android:name=".WeatherInformation"
+            android:label="@string/title_activity_weather_information"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AdminPage" />
         <activity android:name=".SignIn" />
         <activity android:name=".SignUp" />
         <activity android:name=".Menu" />
@@ -35,10 +45,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

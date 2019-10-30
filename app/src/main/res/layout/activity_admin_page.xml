@@ -24,9 +24,9 @@
         android:id="@+id/crpName"
         android:background="@android:color/white"
         android:layout_width="270dp"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="70dp"
         />
 
     <EditText
@@ -34,9 +34,9 @@
         android:id="@+id/crpLat"
         android:inputType="number"
         android:layout_width="270dp"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="254dp"
+        android:layout_marginTop="115dp"
         android:background="@android:color/white" />
 
     <EditText
@@ -44,28 +44,114 @@
         android:id="@+id/crpLon"
         android:inputType="number"
         android:layout_width="270dp"
-        android:layout_height="44dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="354dp"
+        android:layout_marginTop="160dp"
         android:background="@android:color/white" />
 
     <EditText
         android:hint="Month"
         android:id="@+id/crpMon"
         android:inputType="number"
-        android:layout_width="263dp"
-        android:layout_height="44dp"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="454dp"
+        android:layout_marginTop="205dp"
+        android:background="@android:color/white" />
+
+    <EditText
+        android:hint="Minimum Temperature"
+        android:id="@+id/minTempOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@android:color/white" />
+
+    <EditText
+        android:hint="Maximum Temperature"
+        android:id="@+id/maxTempOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="295dp"
+        android:background="@android:color/white" />
+
+    <EditText
+        android:hint="Minimum Humidity"
+        android:id="@+id/minHumidityOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="340dp"
+        android:background="@android:color/white" />
+
+    <EditText
+        android:hint="Maximum Humidity"
+        android:id="@+id/maxHumidityOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="385dp"
+        android:background="@android:color/white" />
+
+    <EditText
+        android:hint="Interval of Fertilizing"
+        android:id="@+id/fertilizingIntervalOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="430dp"
+        android:background="@android:color/white" />
+    <EditText
+        android:hint="Total Feritlization Time"
+        android:id="@+id/totalFertiliaztionTimeOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="475dp"
+        android:background="@android:color/white" />
+    <EditText
+        android:hint="Interval of Insecticide"
+        android:id="@+id/insecticideIntervalOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="520dp"
+        android:background="@android:color/white" />
+    <EditText
+        android:hint="Total Insecticide Time"
+        android:id="@+id/totalInsecticideTimeOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="565dp"
+        android:background="@android:color/white" />
+    <EditText
+        android:hint="Cultivation Duration"
+        android:id="@+id/cultivationDurationOfCrop"
+        android:inputType="number"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="610dp"
         android:background="@android:color/white" />
 
     <Button
         android:background="@drawable/rounded_button"
         android:id="@+id/addcrop"
         android:layout_width="154dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="660dp"
         android:text="ADD" />
 
 

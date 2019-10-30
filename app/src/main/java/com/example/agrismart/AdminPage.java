@@ -14,14 +14,41 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminPage extends AppCompatActivity {
     DatabaseReference mDatabase;
+
+    EditText et1 = null;
+    EditText et2 = null;
+    EditText et3 = null;
+    EditText et4 = null;
+    EditText minTemp = null;
+    EditText maxTemp = null;
+    EditText minHumidity = null;
+    EditText maxHimidity = null;
+    EditText fertilizingInterval = null;
+    EditText totalFertilizingTime = null;
+    EditText insecticideInterval = null;
+    EditText totalInsecticideTime = null;
+    EditText cultivationDuration = null;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
-        final EditText et1= (EditText)findViewById(R.id.crpName);
-        final EditText et2= (EditText)findViewById(R.id.crpLat);
-        final EditText et3= (EditText)findViewById(R.id.crpLon);
-        final EditText et4= (EditText)findViewById(R.id.crpMon);
+        et1= (EditText)findViewById(R.id.crpName);
+        et2= (EditText)findViewById(R.id.crpLat);
+        et3= (EditText)findViewById(R.id.crpLon);
+        et4= (EditText)findViewById(R.id.crpMon);
+
+        minTemp = (EditText) findViewById(R.id.minTempOfCrop);
+        maxTemp = (EditText) findViewById(R.id.maxTempOfCrop);
+        minHumidity = (EditText) findViewById(R.id.minHumidityOfCrop);
+        maxHimidity = (EditText) findViewById(R.id.maxHumidityOfCrop);
+        fertilizingInterval = (EditText) findViewById(R.id.fertilizingIntervalOfCrop);
+        totalFertilizingTime = (EditText) findViewById((R.id.totalFertiliaztionTimeOfCrop));
+        insecticideInterval = (EditText) findViewById(R.id.insecticideIntervalOfCrop);
+        totalInsecticideTime = (EditText) findViewById(R.id.totalInsecticideTimeOfCrop);
+        cultivationDuration = (EditText) findViewById(R.id.cultivationDurationOfCrop);
 
 
         Button btn = (Button)findViewById(R.id.addcrop);

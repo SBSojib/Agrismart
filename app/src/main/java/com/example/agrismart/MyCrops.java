@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,6 +26,8 @@ public class MyCrops extends AppCompatActivity {
     ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     MyAdapter myAdapter;
+
+    public static String selectedCropName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class MyCrops extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MyCrops.this,Extra.class);
                 Crop c=list.get(position);
+                selectedCropName = c.getName();
+                Log.e("Name",selectedCropName);
                 System.out.println(listView.getItemAtPosition(position).toString());
                 intent.putExtra("crname",c.getName());
                 startActivity(intent);

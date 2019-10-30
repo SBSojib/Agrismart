@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -109,23 +110,11 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 createLocationRequest();
             }
         }
+        //dataRetrive();
 
-        /*btnGetCoordinates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                displayLocation();
-            }
-        });
-        btnLocationUpdates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tooglePeriodicLoctionUpdates();
-            }
-        });
-
-
-*/
-
+        //Log.e("LatitudeS", String.valueOf(lat));
+        //Log.e("LatitudeS", String.valueOf(lon));
+/*
         listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
@@ -141,6 +130,19 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
                 for(DataSnapshot snap: dataSnapshot.getChildren()) {
                     Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+                    Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);
+
                     if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
                         list.add(cropName);
                     }
@@ -168,7 +170,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 startActivity(intent);
             }
         });
-
+*/
     }
 
 
@@ -220,12 +222,19 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             double longitude = mLastLocation.getLongitude();
             lat = (int)latitude;
             lon = (int)longitude;
+
+            dataRetrive();
+
+            Log.e("Latitude in Display", String.valueOf(lat));
+            Log.e("Longitude in Diplay", String.valueOf(lon));
             //txtCoordinates.setText(lat + " / " + lon);
-        } else {
+        }
+        else {
             lat = 0;
             lon = 0;
             //txtCoordinates.setText(lat+" / "+lon);
         }
+
 
     }
 
@@ -280,17 +289,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     public void onConnected(@Nullable Bundle bundle) {
         tooglePeriodicLoctionUpdates();
         displayLocation();
-        if(mRequestingLocationUpdates)
-            startLocationUpdates();
-    }
-
-    public void update() {
-        tooglePeriodicLoctionUpdates();
-        displayLocation();
+        //mGoogleApiClient.disconnect();
         if(mRequestingLocationUpdates) {
             startLocationUpdates();
         }
+
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -305,7 +310,65 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        displayLocation();
+        //displayLocation();
+    }
+
+    public void dataRetrive() {
+        listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
+        list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
+        databaseReference.addValueEventListener((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                list.clear();
+
+                for(DataSnapshot snap: dataSnapshot.getChildren()) {
+                    Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+                    /*Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);*/
+
+                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
+                        list.add(cropName);
+                    }
+
+
+                    myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
+                    listView.setAdapter(myAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
+                Crop2 c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("pos",c.getName());
+                startActivity(intent);
+            }
+        });
     }
 
 }
