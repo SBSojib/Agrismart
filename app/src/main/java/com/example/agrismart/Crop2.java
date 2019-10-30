@@ -36,6 +36,24 @@ public class Crop2 {
 
     public Crop2(String name, int month, int latitude, int longitude, double minTemp, double maxTemp,
                  double minHumidity, double maxHumidity, int fertilizingInterval, int totalFertilizationTime,
+                    int insecticideInterval, int totalInsecticideTime, int cultivationDuration) {
+        this.name = name;
+        this.month = month;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+        this.minHumidity = minHumidity;
+        this.maxHumidity = maxHumidity;
+        this.fertilizingInterval = fertilizingInterval;
+        this.totalFertilizationTime = totalFertilizationTime;
+        this.insecticideInterval = insecticideInterval;
+        this.totalInsecticideTime = totalInsecticideTime;
+        this.cultivationDuration = cultivationDuration;
+    }
+
+    public Crop2(String name, int month, int latitude, int longitude, double minTemp, double maxTemp,
+                 double minHumidity, double maxHumidity, int fertilizingInterval, int totalFertilizationTime,
                  int insecticideInterval, int totalInsecticideTime, int cultivationDuration, PDFView fertilizingPDF,
                  PDFView insecticidePDF, PDFView marketPricPDF, PDFView newTechnologyPDF, PDFView progressPDF) {
         this.name = name;

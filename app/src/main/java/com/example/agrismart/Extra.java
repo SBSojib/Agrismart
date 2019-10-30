@@ -39,6 +39,19 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import android.app.Notification;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+import static com.example.agrismart.Notification.CHANNEL_1_ID;
+import static com.example.agrismart.Notification.CHANNEL_2_ID;
+
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,6 +76,23 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
     ImageView imageView;
     OpenWeatherMap openWeatherMap = new OpenWeatherMap();
     int MY_PERMISSION = 0;
+
+    int temperature = 0;
+    int humidity = 0;
+    int windSpeed = 0;
+    int fertilizingInterval=0;
+    int insecticideInterval=0;
+    int cultivationDuration = 0;
+    String condition = "OK";
+    String cropNameInExtra="Crop";
+    TextView temperatureUpdate;
+    TextView humidityUpdate;
+    TextView fertilizationUpdate;
+    TextView insecticideUpdate;
+
+    private NotificationManagerCompat notificationManager;
+    private EditText editTextTitle;
+    private EditText editTextMassage;
 
     private static final int MY_PERMISSION_REQUEST_CODE = 7171;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 7172;
@@ -144,65 +174,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         }
 
 
-        Log.e("LatitudeS", String.valueOf(lat));
-        Log.e("LatitudeS", String.valueOf(lon));
 
-        //listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
-        list = new ArrayList<>();
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Retreiving");
-        progressDialog.show();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
-        databaseReference.addValueEventListener((new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                list.clear();
-
-                for(DataSnapshot snap: dataSnapshot.getChildren()) {
-                    Crop2 cropName = snap.getValue(Crop2.class);
-
-                    String s1 = String.valueOf(lat);
-                    String s2 = String.valueOf(lon);
-                    Log.e("Latitude: ",s1);
-                    Log.e("Longitude: ",s2);
-                    new getWeather().execute(Common.apiRequest(String.valueOf(s1), String.valueOf(s2)));
-
-                    String slat = String.valueOf((cropName.latitude));
-                    String slon = String.valueOf(cropName.longitude);
-                    String smon = String.valueOf(cropName.month);
-                    /*Log.e("fLatitude: ", slat);
-                    Log.e("fLongitude: ",slon);
-                    Log.e("fMonth: ", smon);*/
-
-                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
-                        list.add(cropName);
-                    }
-
-
-                    myAdapter = new MyAdapter2(Extra.this, R.layout.items,list);
-                    //listView.setAdapter(myAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        }));
-
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Extra.this,RegistrationInput.class);
-                Crop2 c=list.get(position);
-                System.out.println(c.getName());
-                intent.putExtra("pos",c.getName());
-                startActivity(intent);
-            }
-        });*/
+        //dataRetrive();
 
 
         Intent i = getIntent();
@@ -248,6 +221,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
                 startActivity(i);
             }
         });
+
+        /*
         TextView myTextView = (TextView)findViewById(R.id.cropDescrpt);
 
         InputStream inputStream;
@@ -285,7 +260,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         }
 
         myTextView.setText(myText);
-
+        */
+        
 
     }
 
@@ -338,11 +314,15 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             double longitude = mLastLocation.getLongitude();
             lat = latitude;
             lon = longitude;
+            new getWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
+            dataRetrive();
+            Log.e("Debuging: ", "Reached");
             //txtCoordinates.setText(lat + " / " + lon);
         }
         else {
             lat = 0;
             lon = 0;
+            Log.e("Debuging: ", "Not Reached");
             //txtCoordinates.setText(lat+" / "+lon);
         }
 
@@ -399,8 +379,9 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
     public void onConnected(@Nullable Bundle bundle) {
         tooglePeriodicLoctionUpdates();
         displayLocation();
-        if(mRequestingLocationUpdates)
-            startLocationUpdates();
+        if(mRequestingLocationUpdates) {
+            //startLocationUpdates();
+        }
 
     }
 
@@ -418,8 +399,106 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        displayLocation();
+        //displayLocation();
     }
+
+    public void dataRetrive() {
+        //listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
+        //list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
+        databaseReference.addValueEventListener((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                //list.clear();
+
+                for(DataSnapshot snap: dataSnapshot.getChildren()) {
+                    Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+
+                    cropNameInExtra = MyCrops.selectedCropName;
+                    //Log.e("Crop",cropNameInExtra);
+                    //Log.e("CropF",cropName.name);
+
+                    if((cropName.name).equals(cropNameInExtra)) {
+                        //list.add(cropName);
+                        //Log.e("Temp",String.valueOf(cropName.minTemp));
+                        temperatureUpdate = (TextView) findViewById(R.id.temperatureUpdateOfCrop);
+                        humidityUpdate = (TextView) findViewById(R.id.humidityUpdateOfCrop);
+                        fertilizationUpdate = (TextView) findViewById(R.id.fertilizationUpdateOfCrop);
+                        insecticideUpdate = (TextView) findViewById(R.id.insecticideUpdateOfCrop);
+
+                        Log.e("TemparatureCrop",String.valueOf(cropName.maxTemp));
+                        Log.e("Temparature",String.valueOf(temperature));
+                        if(temperature<cropName.minTemp) {
+                            temperatureUpdate.setText("Temperature has gone below the minimum," +
+                                    " take necessary steps or crops can be harmed");
+
+                        }
+                        else if(temperature>cropName.maxTemp) {
+                            temperatureUpdate.setText("Temperature has gone above the maximum," +
+                                    " take necessary steps or crops can be harmed");
+                        }
+                        else{
+                            temperatureUpdate.setText("Temperature is fine for the crop");
+                        }
+
+                        if(humidity<cropName.minHumidity ) {
+                            humidityUpdate.setText("Humidity has gone below the minimum," +
+                                    " take necessary steps or crops can be harmed");
+                        }
+                        else if(humidity>cropName.maxHumidity) {
+                            humidityUpdate.setText("Humidity has gone above the maximum," +
+                                    " take necessary steps or crops can be harmed");
+                        }
+                        else{
+                            humidityUpdate.setText("Humidity is fine for the crop");
+                        }
+
+                        fertilizationUpdate.setText("You need to fertilize the crops in "+
+                                String.valueOf(cropName.fertilizingInterval)+" days");
+                        insecticideUpdate.setText("You need to give necessary Insecticide in "+
+                                String.valueOf(cropName.insecticideInterval)+" days");
+
+                    }
+
+
+                    //myAdapter = new MyAdapter2(Extra.this, R.layout.items,list);
+                    //listView.setAdapter(myAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }));
+
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Extra.this,RegistrationInput.class);
+                Crop2 c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("pos",c.getName());
+                startActivity(intent);
+            }
+        });*/
+    }
+
 
     public class getWeather extends AsyncTask<String,Void,String> {
 
@@ -459,7 +538,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             openWeatherMap = gson.fromJson(s,mType);
             pd.dismiss();
 
-            textCity.setText(String.format("%s,%s",openWeatherMap.getName(), openWeatherMap.getSys().getCountry()));
+            //textCity.setText(String.format("%s,%s",openWeatherMap.getName(), openWeatherMap.getSys().getCountry()));
             //textLastUpdate.setText(String.format("Last Updated: %s", Common.getDateNow()));
             textDescription.setText((String.format("%s",openWeatherMap.getWeather().get(0).getDescription())));
             textHumidity.setText((String.format("Humidity: %d%%",openWeatherMap.getMain().getHumidity())));
@@ -472,6 +551,15 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             Picasso.with(Extra.this)
                     .load(Common.getImage(openWeatherMap.getWeather().get(0).getIcon())).into(imageView);
 
+            double temp = openWeatherMap.getMain().getTemp();
+            temperature = (int)temp;
+            temperature-=273;
+            humidity = openWeatherMap.getMain().getHumidity();
+            condition = openWeatherMap.getWeather().get(0).getDescription();
+            double Speed = openWeatherMap.getWind().getSpeed();
+            windSpeed = (int)Speed;
+            windSpeed = 10;
+            Log.e("Speed",String.valueOf(windSpeed));
 
         }
     }

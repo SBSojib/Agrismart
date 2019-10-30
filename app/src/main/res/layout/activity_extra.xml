@@ -90,12 +90,49 @@
         />
 
     <TextView
-        android:id="@+id/cropDescrpt"
+        android:id="@+id/viewForUpdate"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="300dp"
         android:background="#ffffff"
-        android:text="Description"
+        android:text=""
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/temperatureUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/humidityUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/fertilizationUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/insecticideUpdateOfCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="600dp"
+        android:background="#ffffff"
+        android:text=""
         android:textSize="20dp"
         />
 
@@ -138,7 +175,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="160dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/imageView"
         android:layout_gravity="center"
         />
@@ -147,8 +184,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="160dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="173dp"
         android:text=""
         android:textSize="20sp"
         android:gravity="center"
