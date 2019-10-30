@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+    android:background="@drawable/earthybackground"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryDark"
+    android:text="Sign In"
+    android:textSize="25dp"
+    android:gravity="center"
+    android:textColor="@android:color/white"
+    android:fontFamily="sans-serif-black"/>
+<EditText
+    android:id="@+id/usernameText"
+    android:hint="E-Mail"
+    android:background="@android:color/white"
+    android:layout_width="320dp"
+    android:layout_height="44dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="204dp"
+    />
+<EditText
+    android:hint="Password"
+    android:id="@+id/passText"
+    android:inputType="textPassword"
+    android:background="@android:color/white"
+    android:layout_width="320dp"
+    android:layout_height="44dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="354dp"
+    />
+
+
+
+<Button
+    android:background="@drawable/rounded_button"
+    android:text="Sign In"
+    android:id="@+id/signInConfirmButton"
+    android:layout_width="176dp"
+    android:layout_height="50dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="554dp"
+    android:backgroundTint="@android:color/white"
+    ></Button>
+
+
+
+</RelativeLayout>

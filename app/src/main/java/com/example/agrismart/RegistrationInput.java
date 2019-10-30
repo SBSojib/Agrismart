@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,7 +30,7 @@ public class RegistrationInput extends AppCompatActivity {
         final Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
         final Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
 
-        final String[] item1 = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        final String[] item1 = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
         final String[] item2 = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September",
                 "October", "November", "December"};
         final String[] item3 = new String[]{"2019", "2020", "2021", "2022"};
@@ -46,7 +47,7 @@ public class RegistrationInput extends AppCompatActivity {
         spinner4.setAdapter(adapter4);
 
         Intent intent = getIntent();
-        final String name = intent.getStringExtra("pos");
+        final String name = intent.getStringExtra("crname");
         Intent i = new Intent(this,MyCrops.class);
 
         button = (Button) findViewById(R.id.buttonOfConfirmingRegistration);
@@ -64,11 +65,12 @@ public class RegistrationInput extends AppCompatActivity {
                 DatabaseReference mDatabase;
 // ...
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-
+                String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                 Crop crop = new Crop(name,item1[k1],item2[k2],item3[k3],qty,item4[k4]);
-                mDatabase.child("crops").child(name).setValue(crop);
-                startActivity(new Intent(RegistrationInput.this, MainActivity.class));
+                String node = name +" " + item1[k1]+" " +item2[k2] + " " + item3[k3];
+                mDatabase.child("crops").child(currentuser).child(node).setValue(crop);
+                startActivity(new Intent(RegistrationInput.this, Menu.class));
 
             }
         });

@@ -1,0 +1,7 @@
+Watering interval : 1 inch per day
+
+Check for this fertilizer: Potassium, Magnesium,Phosphorus
+
+Check for this insecticide: Glyphosphate
+
+Use buttons for detailed caring process

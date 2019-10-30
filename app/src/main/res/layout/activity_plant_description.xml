@@ -10,7 +10,7 @@ android:orientation="vertical">
     android:layout_height="wrap_content"
     android:textSize="34dp"
     android:textAlignment="center"
-    android:text="@string/Potato" />
+     />
 
 <ScrollView
     android:layout_width="match_parent"

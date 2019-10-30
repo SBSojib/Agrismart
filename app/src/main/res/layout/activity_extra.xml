@@ -10,10 +10,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
         android:text="Caring Details"
-        android:textSize="35dp"
+        android:textSize="25dp"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:fontFamily="sans-serif-black"/>
@@ -22,57 +22,218 @@
     <Button
         android:id="@+id/fertilizingButton"
         android:text="Fertilizer"
-        android:textSize="20dp"
-        android:layout_width="250dp"
+        android:textSize="15dp"
+        android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="100dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"/>
+        android:layout_marginVertical="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     <Button
         android:id="@+id/insecticideButton"
         android:text="Insecticide"
-        android:textSize="20dp"
-        android:layout_width="250dp"
+        android:textSize="15dp"
+        android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="200dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"/>
+        android:layout_marginVertical="100dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <Button
         android:id="@+id/progressButton"
-        android:layout_width="248dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="300dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"
         android:text="Progress"
-        android:textSize="20dp" />
+        android:textSize="15dp"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
+        android:layout_marginVertical="150dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        />
     <Button
         android:id="@+id/marketpriceButon"
         android:text="Market Price"
-        android:textSize="20dp"
-        android:layout_width="250dp"
+        android:textSize="15dp"
+        android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="400dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif-black"/>
+        android:layout_marginVertical="200dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <Button
         android:id="@+id/newtechButton"
         android:text="New Technology"
-        android:textSize="20dp"
-        android:layout_width="250dp"
+        android:textSize="15dp"
+        android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="500dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
+        android:layout_marginVertical="250dp"
+        android:backgroundTint="#FFFFFF"
         android:fontFamily="sans-serif-black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="100dp"
+        android:background="#ffffff"
         />
 
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="300dp"
+        android:background="#ffffff"
+        />
+
+    <TextView
+        android:id="@+id/viewForUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="300dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/temperatureUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/humidityUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/fertilizationUpdateOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/insecticideUpdateOfCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="600dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/weatherDescrpt"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="141dp"
+        android:background="#ffffff"
+        android:text=""
+        android:textSize="20dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/textCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="20dp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/textLastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="15sp"
+        android:gravity="center"
+        />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="60dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="173dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/textHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/textTimeSunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/textTimeSunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/textCelcius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="160dp"
+        android:text=""
+        android:textSize="20sp"
+        android:gravity="center"
+        />
 
 
 </RelativeLayout>

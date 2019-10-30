@@ -1,0 +1,7 @@
+Watering interval : 4000-5000 litre/kg
+
+Check for this fertilizer: Urea,Phosphorus
+
+Check for this insecticide: Carbaryl,Lambda-cyhalothrin, malathion and zeta-cypermethrin
+
+Use buttons for detailed caring process

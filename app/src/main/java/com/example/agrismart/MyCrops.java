@@ -4,10 +4,13 @@ import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +27,8 @@ public class MyCrops extends AppCompatActivity {
     private DatabaseReference databaseReference;
     MyAdapter myAdapter;
 
+    public static String selectedCropName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +40,8 @@ public class MyCrops extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Retreiving...");
         progressDialog.show();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("crops");
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("crops").child(currentuser);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -45,8 +50,8 @@ public class MyCrops extends AppCompatActivity {
                 list.clear();
 
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    Crop doctor = snap.getValue(Crop.class);
-                    list.add(doctor);
+                    Crop c = snap.getValue(Crop.class);
+                    list.add(c);
 
                     myAdapter = new MyAdapter(MyCrops.this,R.layout.items,list);
                     listView.setAdapter(myAdapter);
@@ -63,8 +68,10 @@ public class MyCrops extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MyCrops.this,Extra.class);
                 Crop c=list.get(position);
-                System.out.println(c.getName());
-                intent.putExtra("doctor",listView.getItemAtPosition(position).toString());
+                selectedCropName = c.getName();
+                Log.e("Name",selectedCropName);
+                System.out.println(listView.getItemAtPosition(position).toString());
+                intent.putExtra("crname",c.getName());
                 startActivity(intent);
             }
         });

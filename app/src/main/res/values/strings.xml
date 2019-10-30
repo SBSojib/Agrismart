@@ -20,4 +20,5 @@
     <string name="app_name">Agrismart</string>
     <string name="register_crops">Regsiter Crops</string>
     <string name="Extra">Extra</string>
+    <string name="title_activity_weather_information">WeatherInformation</string>
 </resources>

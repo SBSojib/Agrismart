@@ -1,0 +1,7 @@
+Watering interval : 2-3 days
+
+Check for this fertilizer: Nitrogen,Phosphorus
+
+Check for this insecticide: permethrin, bifenthrin, cyhalothrin, malathion, carbaryl or cyfluthrin
+
+Use buttons for detailed caring process

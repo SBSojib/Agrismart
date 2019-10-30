@@ -5,37 +5,50 @@
     android:background="@drawable/earthybackground">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Insert Data"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date:"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:layout_marginTop="200dp"
         ></TextView>
 
     <Spinner
+        android:backgroundTint="@android:color/white"
         android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="205dp"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="200dp"
         android:layout_marginLeft="80dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
     <Spinner
+        android:backgroundTint="@android:color/white"
         android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="205dp"
-        android:layout_marginLeft="180dp"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="170dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
     <Spinner
+        android:backgroundTint="@android:color/white"
         android:id="@+id/spinner3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="205dp"
-        android:layout_marginLeft="280dp"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="328dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
@@ -43,36 +56,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Field Size:"
-        android:textSize="25dp"
-        android:layout_marginTop="300dp"
+        android:textSize="20dp"
+        android:layout_marginTop="320dp"
         ></TextView>
 
     <EditText
         android:id="@+id/qtyText"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
         android:layout_marginTop="300dp"
-        android:layout_marginLeft="180dp"
+        android:layout_marginLeft="100dp"
         ></EditText>
 
     <Spinner
+        android:backgroundTint="@android:color/white"
         android:id="@+id/spinner4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="305dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="300dp"
         android:layout_marginLeft="280dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
     <Button
         android:id="@+id/buttonOfConfirmingRegistration"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="600dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_button"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:text="Confirm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:backgroundTint="#FFFFFF"
         ></Button>
 
 

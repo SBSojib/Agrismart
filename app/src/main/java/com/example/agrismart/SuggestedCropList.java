@@ -6,11 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +25,16 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static com.google.android.gms.common.api.GoogleApiClient.*;
 
@@ -42,8 +54,15 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     private static int FATEST_INTERVAL = 3000; // SEC
     private static int DISPLACEMENT = 10; // METERS
 
-    int lat=0;
-    int lon=0;
+    int lat = 0;
+    int lon = 0;
+    int mon = 0;
+
+    ListView listView;
+    List<Crop2> list;
+    ProgressDialog progressDialog;
+    private DatabaseReference databaseReference;
+    MyAdapter2 myAdapter;
 
 
     @Override
@@ -65,19 +84,18 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggested_crop_list);
 
-        txtCoordinates = (TextView) findViewById(R.id.textView);
-        //btnGetCoordinates = (Button) findViewById(R.id.button);
-        //btnLocationUpdates = (Button) findViewById(R.id.button2);
+        //txtCoordinates = (TextView) findViewById(R.id.textView);
 
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
-        TextView textViewDate = (TextView) findViewById(R.id.textView2);
+        //TextView textViewDate = (TextView) findViewById(R.id.textView2);
         String month="";
         for(int i=0; ;i++) {
             if(currentDate.charAt(i) == '/') break;
             month += currentDate.charAt(i);
+            mon = Integer.parseInt(month);
         }
-        textViewDate.setText(month);
+        //textViewDate.setText(month);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -92,17 +110,64 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 createLocationRequest();
             }
         }
+        //dataRetrive();
 
-        /*btnGetCoordinates.setOnClickListener(new View.OnClickListener() {
+        //Log.e("LatitudeS", String.valueOf(lat));
+        //Log.e("LatitudeS", String.valueOf(lon));
+/*
+        listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
+        list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
+        databaseReference.addValueEventListener((new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                displayLocation();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                list.clear();
+
+                for(DataSnapshot snap: dataSnapshot.getChildren()) {
+                    Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+                    Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);
+
+                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
+                        list.add(cropName);
+                    }
+
+
+                    myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
+                    listView.setAdapter(myAdapter);
+                }
             }
-        });
-        btnLocationUpdates.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-                tooglePeriodicLoctionUpdates();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
+                Crop2 c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("pos",c.getName());
+                startActivity(intent);
             }
         });
 */
@@ -157,12 +222,19 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
             double longitude = mLastLocation.getLongitude();
             lat = (int)latitude;
             lon = (int)longitude;
-            txtCoordinates.setText(lat + " / " + lon);
-        } else {
+
+            dataRetrive();
+
+            Log.e("Latitude in Display", String.valueOf(lat));
+            Log.e("Longitude in Diplay", String.valueOf(lon));
+            //txtCoordinates.setText(lat + " / " + lon);
+        }
+        else {
             lat = 0;
             lon = 0;
-            txtCoordinates.setText(lat+" / "+lon);
+            //txtCoordinates.setText(lat+" / "+lon);
         }
+
 
     }
 
@@ -217,10 +289,12 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     public void onConnected(@Nullable Bundle bundle) {
         tooglePeriodicLoctionUpdates();
         displayLocation();
-        if(mRequestingLocationUpdates)
+        //mGoogleApiClient.disconnect();
+        if(mRequestingLocationUpdates) {
             startLocationUpdates();
-    }
+        }
 
+    }
 
 
     @Override
@@ -236,7 +310,65 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
-        displayLocation();
+        //displayLocation();
+    }
+
+    public void dataRetrive() {
+        listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
+        list = new ArrayList<>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Retreiving");
+        progressDialog.show();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
+        databaseReference.addValueEventListener((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                list.clear();
+
+                for(DataSnapshot snap: dataSnapshot.getChildren()) {
+                    Crop2 cropName = snap.getValue(Crop2.class);
+
+                    String s1 = String.valueOf(lat);
+                    String s2 = String.valueOf(lon);
+                    Log.e("Latitude: ",s1);
+                    Log.e("Longitude: ",s2);
+
+                    String slat = String.valueOf((cropName.latitude));
+                    String slon = String.valueOf(cropName.longitude);
+                    String smon = String.valueOf(cropName.month);
+                    /*Log.e("fLatitude: ", slat);
+                    Log.e("fLongitude: ",slon);
+                    Log.e("fMonth: ", smon);*/
+
+                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
+                        list.add(cropName);
+                    }
+
+
+                    myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
+                    listView.setAdapter(myAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
+                Crop2 c=list.get(position);
+                System.out.println(c.getName());
+                intent.putExtra("pos",c.getName());
+                startActivity(intent);
+            }
+        });
     }
 
 }
