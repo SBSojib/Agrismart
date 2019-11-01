@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignUp extends AppCompatActivity {
 
     private EditText emailTV, passwordTV;
+    EditText confirmPassword;
     private Button loginBtn;
 
 
@@ -55,8 +56,10 @@ public class SignUp extends AppCompatActivity {
 
 
         String email, password;
+        String confirmPass;
         email = emailTV.getText().toString();
         password = passwordTV.getText().toString();
+        confirmPass = confirmPassword.getText().toString();
 
 
         if (TextUtils.isEmpty(email)) {
@@ -67,11 +70,19 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
             return;
         }
+        if (TextUtils.isEmpty(confirmPass)) {
+            Toast.makeText(getApplicationContext(), "Please confirm password!", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(stat.equals("User") && password.equals("agri300")){
             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             return;
         }
-        if((stat.equals("Admin") && password.equals("agri300")) || (stat.equals("User") && !password.equals("agri300"))) {
+        if (!password.equals(confirmPass)) {
+            Toast.makeText(getApplicationContext(), "Password doesn't match!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if((stat.equals("Admin") && password.equals("agri300")) || (stat.equals("User") && !password.equals("agri300"))) {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -81,6 +92,7 @@ public class SignUp extends AppCompatActivity {
                                 Intent intent = new Intent(SignUp.this, SignIn.class);
 
                                 startActivity(intent);
+                                finish();
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
@@ -94,6 +106,7 @@ public class SignUp extends AppCompatActivity {
     private void initializeUI() {
         emailTV = findViewById(R.id.regUsernameText);
         passwordTV = findViewById(R.id.regPassText);
+        confirmPassword = findViewById(R.id.regConfirmPassText);
 
         loginBtn = findViewById(R.id.regConfirmButton);
 

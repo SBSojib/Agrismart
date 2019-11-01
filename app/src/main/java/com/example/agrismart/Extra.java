@@ -62,6 +62,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.google.android.gms.common.api.GoogleApiClient.*;
+import static java.lang.System.exit;
 
 public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener, LocationListener {
@@ -116,6 +117,15 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
     ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     MyAdapter2 myAdapter;
+
+    String name = " ";
+    int plantingDay = 0;
+    int plantingMonth = 0;
+    int plantingYear = 0;
+    int presentDay=0;
+    int presentMonth = 0;
+    int presentYear = 0;
+    int differenceInDays = 0;
 
 
     @Override
@@ -177,9 +187,10 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
 
         //dataRetrive();
 
+        getCurrentDate();
+        getPlantingDate();
+        getDayDifference();
 
-        Intent i = getIntent();
-        final String name= i.getStringExtra("crname");
         Button next1 = (Button) findViewById(R.id.fertilizingButton);
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,47 +233,76 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             }
         });
 
-        /*
-        TextView myTextView = (TextView)findViewById(R.id.cropDescrpt);
+    }
 
-        InputStream inputStream;
-        if("Potato".equals(name)){
-            inputStream = getResources().openRawResource(R.raw.potato);
-        }
-        else if("Wheat".equals(name)){
-            inputStream = getResources().openRawResource(R.raw.wheat);
-        }
-        else if("Corn".equals(name)){
-            inputStream = getResources().openRawResource(R.raw.corn);
-        }
-        else if("Tomato".equals(name)){
-            inputStream = getResources().openRawResource(R.raw.tomato);
-        }
-        else{
-            inputStream = getResources().openRawResource(R.raw.rice);
-        }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    public void getPlantingDate() {
+        Intent i = getIntent();
+        name= i.getStringExtra("crname");
+        String plantingDayString = i.getStringExtra("plantingDay");
+        String plantingMonthString = i.getStringExtra("plantingMonth");
+        String plantingYearString = i.getStringExtra("plantingYear");
+        plantingDay = Integer.parseInt(plantingDayString);
+        plantingMonth = Integer.parseInt(plantingMonthString);
+        plantingYear = Integer.parseInt(plantingYearString);
+    }
 
-        String myText = "";
-        int in;
-        try {
-            in = inputStream.read();
-            while (in != -1)
-            {
-                byteArrayOutputStream.write(in);
-                in = inputStream.read();
+    public  void getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
+        String[] words=currentDate.split("/");
+        String monthS = words[0];
+        String dayS = words[1];
+        String yearDS = words[2];
+        presentMonth = Integer.parseInt(monthS);
+        presentDay = Integer.parseInt(dayS);
+        presentYear = Integer.parseInt(yearDS);
+    }
+
+    public void getDayDifference () {
+        int day1 = plantingDay;
+        int mon1 = plantingMonth;
+        int year1 = plantingYear;
+        int day2 = presentDay;
+        int mon2 = presentMonth;
+        int year2 = presentYear;
+
+        int day_diff, mon_diff, year_diff;
+
+        if(day2 < day1) {
+            // borrow days from february
+            if (mon2 == 3) {
+                //  check whether year is a leap year
+                if ((year2 % 4 == 0 && year2 % 100 != 0) || (year2 % 400 == 0)) {
+                    day2 += 29;
+                }
+
+                else {
+                    day2 += 28;
+                }
             }
-            inputStream.close();
-
-            myText = byteArrayOutputStream.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
+            // borrow days from April or June or September or November
+            else if (mon2 == 5 || mon2 == 7 || mon2 == 10 || mon2 == 12) {
+                day2 += 30;
+            }
+            // borrow days from Jan or Mar or May or July or Aug or Oct or Dec
+            else {
+                day2 += 31;
+            }
+            mon2 = mon2 - 1;
         }
 
-        myTextView.setText(myText);
-        */
-        
+        if (mon2 < mon1) {
+            mon2 += 12;
+            year2 -= 1;
+        }
 
+        day_diff = day2 - day1;
+        mon_diff = mon2 - mon1;
+        year_diff = year2 - year1;
+
+        int difference = day_diff + mon_diff * 30 + year_diff * 365;
+        differenceInDays = difference;
+        Log.e("DifferenceD",String.valueOf(differenceInDays));
     }
 
 
@@ -315,7 +355,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             lat = latitude;
             lon = longitude;
             new getWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
-            dataRetrive();
+            //dataRetrive();
             Log.e("Debuging: ", "Reached");
             //txtCoordinates.setText(lat + " / " + lon);
         }
@@ -380,7 +420,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         tooglePeriodicLoctionUpdates();
         displayLocation();
         if(mRequestingLocationUpdates) {
-            //startLocationUpdates();
+            startLocationUpdates();
         }
 
     }
@@ -467,10 +507,25 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
                             humidityUpdate.setText("Humidity is fine for the crop");
                         }
 
-                        fertilizationUpdate.setText("You need to fertilize the crops in "+
-                                String.valueOf(cropName.fertilizingInterval)+" days");
-                        insecticideUpdate.setText("You need to give necessary Insecticide in "+
-                                String.valueOf(cropName.insecticideInterval)+" days");
+                        if(differenceInDays > 0) {
+                            int value = (differenceInDays - 1) / cropName.fertilizingInterval;
+                            value += 1;
+                            value = value * cropName.fertilizingInterval;
+                            value = value - differenceInDays;
+                            int value2 = (differenceInDays - 1) / cropName.insecticideInterval;
+                            value2 += 1;
+                            value2 = value2 * cropName.insecticideInterval;
+                            value2 = value2 - differenceInDays;
+                            fertilizationUpdate.setText("You need to fertilize the crops in " +
+                                    String.valueOf(value) + " days");
+                            insecticideUpdate.setText("You need to give necessary Insecticide in " +
+                                    String.valueOf(value2) + " days");
+                        }
+                        else {
+                            fertilizationUpdate.setText("Crop is not planted yet, crop will be planted in "+
+                                    String.valueOf(differenceInDays*-1)+" days");
+                            insecticideUpdate.setText("Read the above text again. It's not planted yet, OK?");
+                        }
 
                     }
 
@@ -560,6 +615,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             windSpeed = (int)Speed;
             windSpeed = 10;
             Log.e("Speed",String.valueOf(windSpeed));
+
+            dataRetrive();
 
         }
     }
