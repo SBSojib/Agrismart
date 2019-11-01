@@ -1,7 +1,9 @@
 package com.example.agrismart;
 
+ import androidx.appcompat.app.AlertDialog;
  import androidx.appcompat.app.AppCompatActivity;
 
+ import android.content.DialogInterface;
  import android.content.Intent;
  import android.os.Bundle;
  import android.view.View;
@@ -223,6 +225,29 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
             Log.e("Debuging: ", "Not Reached");
             //txtCoordinates.setText(lat+" / "+lon);
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
+        builder.setTitle("Exit ?");
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("You will be Logged Out")
+                .setCancelable(false)
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 
