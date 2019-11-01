@@ -15,10 +15,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AdminPage extends AppCompatActivity {
     DatabaseReference mDatabase;
 
-    EditText et1 = null;
-    EditText et2 = null;
-    EditText et3 = null;
-    EditText et4 = null;
+    EditText name = null;
+    EditText month = null;
+    EditText latitude = null;
+    EditText longitude = null;
     EditText minTemp = null;
     EditText maxTemp = null;
     EditText minHumidity = null;
@@ -35,10 +35,11 @@ public class AdminPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
-        et1= (EditText)findViewById(R.id.crpName);
-        et2= (EditText)findViewById(R.id.crpLat);
-        et3= (EditText)findViewById(R.id.crpLon);
-        et4= (EditText)findViewById(R.id.crpMon);
+        name= (EditText)findViewById(R.id.crpName);
+        latitude= (EditText)findViewById(R.id.crpLat);
+        longitude= (EditText)findViewById(R.id.crpLon);
+        month= (EditText)findViewById(R.id.crpMon);
+
 
         minTemp = (EditText) findViewById(R.id.minTempOfCrop);
         maxTemp = (EditText) findViewById(R.id.maxTempOfCrop);
@@ -55,21 +56,42 @@ public class AdminPage extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String t1 = et1.getText().toString();
+                String nameValue = name.getText().toString();
 
-                final int val = Integer.valueOf(et2.getText().toString());
-                final int val1 = Integer.valueOf(et2.getText().toString());
-                final int val2 = Integer.valueOf(et2.getText().toString());
+                int latitudeValue = Integer.valueOf(latitude.getText().toString());
+                int longitudeValue = Integer.valueOf(longitude.getText().toString());
+                int monthValue = Integer.valueOf(month.getText().toString());
+
+                int minTempValue = Integer.valueOf(minTemp.getText().toString());
+                int maxTempValue = Integer.valueOf(maxTemp.getText().toString());
+                int minHumidityValue = Integer.valueOf(minHumidity.getText().toString());
+                int maxHumidityValue = Integer.valueOf(maxHimidity.getText().toString());
+                int fertilizerIntervalValue = Integer.valueOf(fertilizingInterval.getText().toString());
+                int totalFertilizingTimeValue = Integer.valueOf(totalFertilizingTime.getText().toString());
+                int insecticideIntervalValue = Integer.valueOf(insecticideInterval.getText().toString());
+                int totalInsecticideTimeValue = Integer.valueOf((totalInsecticideTime.getText().toString()));
+                int cultivationDurationValue = Integer.valueOf(cultivationDuration.getText().toString());
 // ...
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                Crop2 c = new Crop2(t1,val,val1,val2);
+                Crop2 c = new Crop2(nameValue,monthValue,latitudeValue,longitudeValue, minTempValue, maxTempValue, minHumidityValue, maxHumidityValue,
+                        fertilizerIntervalValue, totalFertilizingTimeValue, insecticideIntervalValue,
+                            totalInsecticideTimeValue, cultivationDurationValue);
                 String m= c.getName();
                 mDatabase.child("SuggestedCrops").child(m).setValue(c);
                 Toast.makeText(getApplicationContext(), "Crop Added", Toast.LENGTH_LONG).show();
-                et1.getText().clear();
-                et2.getText().clear();
-                et3.getText().clear();
-                et4.getText().clear();
+                name.getText().clear();
+                latitude.getText().clear();
+                longitude.getText().clear();
+                month.getText().clear();
+                minTemp.getText().clear();
+                maxTemp.getText().clear();
+                minHumidity.getText().clear();
+                maxHimidity.getText().clear();
+                fertilizingInterval.getText().clear();
+                totalFertilizingTime.getText().clear();
+                insecticideInterval.getText().clear();
+                totalInsecticideTime.getText().clear();
+                cultivationDuration.getText().clear();
             }
         });
     }

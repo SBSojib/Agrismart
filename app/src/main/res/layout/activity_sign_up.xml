@@ -22,32 +22,43 @@
         android:layout_width="320dp"
         android:layout_height="44dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="150dp"
         />
     <EditText
-        android:hint="Password/Pass Code"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:id="@+id/regPassText"
         android:background="@android:color/white"
         android:layout_width="320dp"
         android:layout_height="44dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="284dp"
+        android:layout_marginTop="220dp"
+        />
+    <EditText
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:id="@+id/regConfirmPassText"
+        android:background="@android:color/white"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
         />
     <Spinner
 
         android:id="@+id/adminDecideSpinner"
         android:background="@android:color/white"
         android:layout_width="223dp"
-        android:layout_height="47dp"
+        android:layout_height="44dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="454dp"></Spinner>
+        android:layout_marginTop="430dp"></Spinner>
 
     <Button
         android:background="@drawable/rounded_button"
         android:text="Sign Up"
         android:id="@+id/regConfirmButton"
         android:layout_width="176dp"
-        android:layout_height="60dp"
+        android:layout_height="44dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="554dp"
         ></Button>

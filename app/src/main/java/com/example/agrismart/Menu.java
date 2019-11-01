@@ -84,6 +84,7 @@ package com.example.agrismart;
  import static com.example.agrismart.Notification.CHANNEL_2_ID;
 
 
+
 public class Menu extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener, LocationListener{
 
@@ -350,11 +351,11 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(s.contains("Error: Not found city")) {
+           /* if(s.contains("Error: Not found city")) {
                 Log.e("Massage", "Damn You");
                 pd.dismiss();
                 return;
-            }
+            }*/
             Log.e("Debuging", "Finding BUG");
             Gson gson = new Gson();
             Type mType = new TypeToken<OpenWeatherMap>(){}.getType();
@@ -371,18 +372,23 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
             windSpeed = 10;
             Log.e("Speed",String.valueOf(windSpeed));
 
-            if(condition.equals("heavy rain")){
-                View v = null;
-                sendOnChannel1(v);
-            }
-            if(condition.equals("heavy snow")) {
-                View v = null;
-                sendOnChannel1(v);
+            int indicator = MainActivity.flag;
+            Log.e("Value",String.valueOf(indicator));
+            if(indicator == 0) {
+                MainActivity.flag = 1;
+                if (condition.equals("heavy rain")) {
+                    View v = null;
+                    sendOnChannel1(v);
+                }
+                if (condition.equals("heavy snow")) {
+                    View v = null;
+                    sendOnChannel1(v);
 
-            }
-            if(windSpeed>=5) {
-                View v = null;
-                sendOnChannel2(v);
+                }
+                if (windSpeed >= 5) {
+                    View v = null;
+                    sendOnChannel2(v);
+                }
             }
 
         }
