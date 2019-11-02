@@ -184,8 +184,9 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,Fertilizing.class);
+                Intent i = new Intent(Extra.this,FileView.class);
                 i.putExtra("crop",name);
+                i.putExtra("func",1);
                 startActivity(i);
             }
         });
@@ -193,8 +194,9 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,Insecticide.class);
+                Intent i = new Intent(Extra.this,FileView.class);
                 i.putExtra("crop",name);
+                i.putExtra("func",2);
                 startActivity(i);
             }
         });
@@ -216,8 +218,9 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,MarketPrice.class);
+                Intent i = new Intent(Extra.this,FileView.class);
                 i.putExtra("crop",name);
+                i.putExtra("func",3);
                 startActivity(i);
             }
         });

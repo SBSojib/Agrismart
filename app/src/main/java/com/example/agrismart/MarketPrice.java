@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,46 +21,11 @@ public class MarketPrice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_description);
-
-        TextView myTextView = (TextView)findViewById(R.id.mytextview);
-        Intent i =getIntent();
-        final String name = i.getStringExtra("crop");
-
-        InputStream inputStream;
-        if(name.equals("Potato")){
-            inputStream=getResources().openRawResource(R.raw.potato_prc);
-        }
-        else if(name.equals("Tomato")){
-            inputStream=getResources().openRawResource(R.raw.tomato_prc);
-        }
-        else if(name.equals("Rice")){
-            inputStream=getResources().openRawResource(R.raw.rice_prc);
-        }
-        else if(name.equals("Wheat")){
-            inputStream=getResources().openRawResource(R.raw.wheat_prc);
-        }
-        else{
-            inputStream=getResources().openRawResource(R.raw.corn_prc);
-        }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        String myText = "";
-        int in;
-        try {
-            in = inputStream.read();
-            while (in != -1)
-            {
-                byteArrayOutputStream.write(in);
-                in = inputStream.read();
-            }
-            inputStream.close();
-
-            myText = byteArrayOutputStream.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        myTextView.setText(myText);
+        CropPdf c = new CropPdf("Potato","https://firebasestorage.googleapis.com/v0/b/agrismart-cf8ee.appspot.com/o/potato_pest.pdf?alt=media&token=5c3b5cdf-bc6c-4249-88c4-464b407dc290");
+        DatabaseReference mDatabase;
+// ...
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Pesticide").child("Potato").setValue(c);
     }
 
 }

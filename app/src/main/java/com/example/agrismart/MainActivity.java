@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignIn.class));
+                startActivity(new Intent(MainActivity.this, UploadFile.class));
             }
         });
         Button next1 = (Button) findViewById(R.id.goToSignUp);
