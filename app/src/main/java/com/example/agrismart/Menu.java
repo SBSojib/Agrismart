@@ -1,7 +1,9 @@
 package com.example.agrismart;
 
+ import androidx.appcompat.app.AlertDialog;
  import androidx.appcompat.app.AppCompatActivity;
 
+ import android.content.DialogInterface;
  import android.content.Intent;
  import android.os.Bundle;
  import android.view.View;
@@ -82,6 +84,7 @@ package com.example.agrismart;
 
  import static com.example.agrismart.Notification.CHANNEL_1_ID;
  import static com.example.agrismart.Notification.CHANNEL_2_ID;
+
 
 
 public class Menu extends AppCompatActivity implements ConnectionCallbacks,
@@ -225,6 +228,29 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
+        builder.setTitle("Exit ?");
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("You will be Logged Out")
+                .setCancelable(false)
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
@@ -350,11 +376,11 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(s.contains("Error: Not found city")) {
+           /* if(s.contains("Error: Not found city")) {
                 Log.e("Massage", "Damn You");
                 pd.dismiss();
                 return;
-            }
+            }*/
             Log.e("Debuging", "Finding BUG");
             Gson gson = new Gson();
             Type mType = new TypeToken<OpenWeatherMap>(){}.getType();
@@ -371,18 +397,23 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
             windSpeed = 10;
             Log.e("Speed",String.valueOf(windSpeed));
 
-            if(condition.equals("heavy rain")){
-                View v = null;
-                sendOnChannel1(v);
-            }
-            if(condition.equals("heavy snow")) {
-                View v = null;
-                sendOnChannel1(v);
+            int indicator = MainActivity.flag;
+            Log.e("Value",String.valueOf(indicator));
+            if(indicator == 0) {
+                MainActivity.flag = 1;
+                if (condition.equals("heavy rain")) {
+                    View v = null;
+                    sendOnChannel1(v);
+                }
+                if (condition.equals("heavy snow")) {
+                    View v = null;
+                    sendOnChannel1(v);
 
-            }
-            if(windSpeed>=5) {
-                View v = null;
-                sendOnChannel2(v);
+                }
+                if (windSpeed >= 5) {
+                    View v = null;
+                    sendOnChannel2(v);
+                }
             }
 
         }
