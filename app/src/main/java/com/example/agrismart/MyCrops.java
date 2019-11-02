@@ -72,6 +72,9 @@ public class MyCrops extends AppCompatActivity {
                 Log.e("Name",selectedCropName);
                 System.out.println(listView.getItemAtPosition(position).toString());
                 intent.putExtra("crname",c.getName());
+                intent.putExtra("plantingDay",c.getDateDay());
+                intent.putExtra("plantingMonth",c.getDateMonth());
+                intent.putExtra("plantingYear",c.getDateYear());
                 startActivity(intent);
             }
         });

@@ -71,11 +71,15 @@ public class SignIn extends AppCompatActivity {
 
                                 Intent intent = new Intent(SignIn.this, AdminPage.class);
 
-                                startActivity(intent);}
+                                startActivity(intent);
+                                finish();
+                            }
                             else{
                                 Intent intent = new Intent(SignIn.this, Menu.class);
 
-                                startActivity(intent);}
+                                startActivity(intent);
+                                finish();
+                            }
 
                         }
                         else {
