@@ -1,5 +1,7 @@
 package com.example.agrismart.Helper;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,8 +33,13 @@ public class Helper {
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            Log.e("Error",String.valueOf(e));
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e("Error",String.valueOf(e));
+        }
+        if(stream == null) {
+            Log.e("Error","stream is null");
         }
 
         return stream;

@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,16 +19,38 @@ import java.io.InputStream;
 
 public class MarketPrice extends AppCompatActivity {
 
-    PDFView marketPricePdf;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_description);
-        CropPdf c = new CropPdf("Potato","https://firebasestorage.googleapis.com/v0/b/agrismart-cf8ee.appspot.com/o/potato_pest.pdf?alt=media&token=5c3b5cdf-bc6c-4249-88c4-464b407dc290");
-        DatabaseReference mDatabase;
-// ...
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Pesticide").child("Potato").setValue(c);
+
+        final TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView view = (TextView)findViewById(R.id.plantDescrpText);
+        Intent i =getIntent();
+        final String name = i.getStringExtra("crop");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("MarketPrice");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    CropPdf c = snap.getValue(CropPdf.class);
+                    if(c.getName().equals(name)){
+                        String text = c.getData();
+                        view.setText(name + "" +"MarketPrice");
+                        myTextView.setText(text);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+
     }
 
 }

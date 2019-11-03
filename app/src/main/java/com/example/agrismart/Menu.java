@@ -214,6 +214,9 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
             double longitude = mLastLocation.getLongitude();
             lat = latitude;
             lon = longitude;
+            Log.e("ErrorLat",String.valueOf(lat));
+            Log.e("ErrorLon",String.valueOf(lon));
+
             new getWeather().execute(Common.apiRequest(String.valueOf(lat), String.valueOf(lon)));
 
             Log.e("Debuging: ", "Reached");
@@ -367,8 +370,9 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
             String urlString = strings[0];
 
             Helper http = new Helper();
-            stream = http.getHTTPData(urlString);
+           //Problem is here, stream is recieving null value
 
+            stream = http.getHTTPData(urlString);
             return stream;
         }
 
@@ -387,6 +391,7 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
 
             openWeatherMap = gson.fromJson(s,mType);
             pd.dismiss();
+
 
             //textCity.setText(String.format("%s,%s",openWeatherMap.getName(), openWeatherMap.getSys().getCountry()));
             //textLastUpdate.setText(String.format("Last Updated: %s", Common.getDateNow()));

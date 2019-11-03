@@ -1,18 +1,26 @@
 package com.example.agrismart;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class AdminPage extends AppCompatActivity {
     DatabaseReference mDatabase;
@@ -30,7 +38,12 @@ public class AdminPage extends AppCompatActivity {
     EditText insecticideInterval = null;
     EditText totalInsecticideTime = null;
     EditText cultivationDuration = null;
+    InputStream ins=null;
 
+
+    Button btn1;
+    Button btn2;
+    Button btn3;
 
 
     @Override
@@ -55,6 +68,10 @@ public class AdminPage extends AppCompatActivity {
 
 
         Button btn = (Button)findViewById(R.id.addcrop);
+        Button btn1= (Button)findViewById(R.id.addFileFert);
+        Button btn2= (Button)findViewById(R.id.addFilePest);
+        Button btn3= (Button)findViewById(R.id.addFilePrc);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +113,86 @@ public class AdminPage extends AppCompatActivity {
                 cultivationDuration.getText().clear();
             }
         });
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectPdf(1);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectPdf(2);
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectPdf(3);
+            }
+        });
+    }
+    private void selectPdf(int id) {
+        Intent intent = new Intent();
+        intent.setType("text/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        if(id==1){startActivityForResult(Intent.createChooser(intent,"select txt file"),1);}
+        if(id==2){startActivityForResult(Intent.createChooser(intent,"select txt file"),2);}
+        if(id==3){startActivityForResult(Intent.createChooser(intent,"select txt file"),3);}
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            covertFile(data.getData(),1);
+        }
+        if(requestCode==2 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            covertFile(data.getData(),2);
+        }
+        if(requestCode==3 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            covertFile(data.getData(),3);
+        }
+    }
+
+
+
+
+    private void covertFile(Uri data,int id) {
+
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        String myText = "";
+        int in;
+        try {
+            ins = getContentResolver().openInputStream(data);
+            in = ins.read();
+            while (in != -1)
+            {
+                byteArrayOutputStream.write(in);
+                in = ins.read();
+            }
+            ins.close();
+
+            myText = byteArrayOutputStream.toString();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String nameCrop=name.getText().toString();
+        CropPdf c= new CropPdf(nameCrop,myText);
+        DatabaseReference mDatabase;
+// ...
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(id==1){
+            mDatabase.child("Fertilizer").setValue(c);}
+        if(id==2){
+            mDatabase.child("Pesticide").setValue(c);}
+        if(id==3){
+            mDatabase.child("Price").setValue(c);}
+
     }
 
     @Override

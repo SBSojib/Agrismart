@@ -2,21 +2,21 @@ package com.example.agrismart;
 
 public class CropPdf {
     String name;
-    String url;
+    String data;
 
     public CropPdf() {
     }
 
-    public CropPdf(String name,String url) {
+    public CropPdf(String name,String data) {
         this.name = name;
-        this.url=url;
+        this.data=data;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getData() {
+        return data;
     }
 }

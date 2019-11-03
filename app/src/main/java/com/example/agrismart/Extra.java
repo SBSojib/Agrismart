@@ -67,8 +67,7 @@ import static java.lang.System.exit;
 public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         OnConnectionFailedListener, LocationListener {
 
-    TextView textCity;
-    TextView textLastUpdate;
+    TextView textCropName;
     TextView textDescription;
     TextView textHumidity;
     TextView textTimeSunrise;
@@ -90,6 +89,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
     TextView humidityUpdate;
     TextView fertilizationUpdate;
     TextView insecticideUpdate;
+    TextView cultivationDurationUpdate;
 
     private NotificationManagerCompat notificationManager;
     private EditText editTextTitle;
@@ -147,8 +147,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra);
 
-        textCity = (TextView) findViewById(R.id.textCity);
-        textLastUpdate = (TextView) findViewById(R.id.textLastUpdate);
+        textCropName = (TextView) findViewById(R.id.textCropName);
         textDescription = (TextView) findViewById(R.id.textDescription);
         textHumidity = (TextView) findViewById(R.id.textHumidity);
         textTimeSunrise = (TextView) findViewById(R.id.textTimeSunrise);
@@ -195,9 +194,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,FileView.class);
+                Intent i = new Intent(Extra.this,Fertilizing.class);
                 i.putExtra("crop",name);
-                i.putExtra("func",1);
                 startActivity(i);
             }
         });
@@ -205,9 +203,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,FileView.class);
+                Intent i = new Intent(Extra.this,Insecticide.class);
                 i.putExtra("crop",name);
-                i.putExtra("func",2);
                 startActivity(i);
             }
         });
@@ -229,9 +226,8 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Extra.this,FileView.class);
+                Intent i = new Intent(Extra.this,MarketPrice.class);
                 i.putExtra("crop",name);
-                i.putExtra("func",3);
                 startActivity(i);
             }
         });
@@ -482,32 +478,33 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
                         humidityUpdate = (TextView) findViewById(R.id.humidityUpdateOfCrop);
                         fertilizationUpdate = (TextView) findViewById(R.id.fertilizationUpdateOfCrop);
                         insecticideUpdate = (TextView) findViewById(R.id.insecticideUpdateOfCrop);
+                        cultivationDurationUpdate = (TextView) findViewById(R.id.cultivationDurationUpdateOfCrop);
 
                         Log.e("TemparatureCrop",String.valueOf(cropName.maxTemp));
                         Log.e("Temparature",String.valueOf(temperature));
                         if(temperature<cropName.minTemp) {
                             temperatureUpdate.setText("Temperature has gone below the minimum," +
-                                    " take necessary steps or crops can be harmed");
+                                    " take necessary steps.");
 
                         }
                         else if(temperature>cropName.maxTemp) {
                             temperatureUpdate.setText("Temperature has gone above the maximum," +
-                                    " take necessary steps or crops can be harmed");
+                                    " take necessary steps.");
                         }
                         else{
-                            temperatureUpdate.setText("Temperature is fine for the crop");
+                            temperatureUpdate.setText("Temperature is fine for the crop.");
                         }
 
                         if(humidity<cropName.minHumidity ) {
                             humidityUpdate.setText("Humidity has gone below the minimum," +
-                                    " take necessary steps or crops can be harmed");
+                                    " take necessary steps.");
                         }
                         else if(humidity>cropName.maxHumidity) {
                             humidityUpdate.setText("Humidity has gone above the maximum," +
-                                    " take necessary steps or crops can be harmed");
+                                    " take necessary steps.");
                         }
                         else{
-                            humidityUpdate.setText("Humidity is fine for the crop");
+                            humidityUpdate.setText("Humidity is fine for the crop.");
                         }
 
                         if(differenceInDays > 0) {
@@ -525,9 +522,18 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
                                     String.valueOf(value2) + " days");
                         }
                         else {
-                            fertilizationUpdate.setText("Crop is not planted yet, crop will be planted in "+
-                                    String.valueOf(differenceInDays*-1)+" days");
+                            fertilizationUpdate.setText("Crop is not planted yet");
                             insecticideUpdate.setText("Read the above text again. It's not planted yet, OK?");
+                        }
+
+                        if(cropName.cultivationDuration<differenceInDays) {
+                            cultivationDurationUpdate.setText("Cultivation Period is over");
+                        }
+                        else if(differenceInDays<0) {
+                            cultivationDurationUpdate.setText("Crops will be planted in "+String.valueOf(differenceInDays*-1)+" Days");
+                        }
+                        else if(differenceInDays == 0) {
+                            cultivationDurationUpdate.setText("Crop will be planted Today                                                                                                                                                       ");
                         }
 
                     }
@@ -596,8 +602,7 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
             openWeatherMap = gson.fromJson(s,mType);
             pd.dismiss();
 
-            //textCity.setText(String.format("%s,%s",openWeatherMap.getName(), openWeatherMap.getSys().getCountry()));
-            //textLastUpdate.setText(String.format("Last Updated: %s", Common.getDateNow()));
+            textCropName.setText(name+",  "+"Day "+String.valueOf(differenceInDays));
             textDescription.setText((String.format("%s",openWeatherMap.getWeather().get(0).getDescription())));
             textHumidity.setText((String.format("Humidity: %d%%",openWeatherMap.getMain().getHumidity())));
             textTimeSunrise.setText((String.format("Sunrise: %s am",Common.unixTimeStamptoDateTime(openWeatherMap.getSys().getSunrise()))));
