@@ -40,6 +40,7 @@ public class Fertilizing extends Activity {
                         String text = c.getData();
                         view.setText(name + "" +"Fertilizer");
                         myTextView.setText(text);
+
                     }
                 }
             }
