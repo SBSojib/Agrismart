@@ -89,12 +89,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
         //TextView textViewDate = (TextView) findViewById(R.id.textView2);
-        String month="";
-        for(int i=0; ;i++) {
+        mon = calendar.get(Calendar.MONTH) + 1;
+        Log.e("CalenderMonth",String.valueOf(mon));
+        /*for(int i=0; ;i++) {
             if(currentDate.charAt(i) == '/') break;
             month += currentDate.charAt(i);
             mon = Integer.parseInt(month);
-        }
+        }*/
         //textViewDate.setText(month);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -165,8 +166,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
             dataRetrive();
 
-            Log.e("Latitude in Display", String.valueOf(lat));
-            Log.e("Longitude in Diplay", String.valueOf(lon));
+            /*Log.e("Latitude in Display", String.valueOf(lat));
+            Log.e("Longitude in Display", String.valueOf(lon));*/
             //txtCoordinates.setText(lat + " / " + lon);
         }
         else {
@@ -272,8 +273,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
                     String s1 = String.valueOf(lat);
                     String s2 = String.valueOf(lon);
-                    //Log.e("LatitudeFound: ",s1);
-                    //Log.e("LongitudeFound: ",s2);
+                    /*Log.e("LatitudeFound: ",s1);
+                    Log.e("LongitudeFound: ",s2);*/
 
                     String slat = String.valueOf((cropName.latitude));
                     String slon = String.valueOf(cropName.longitude);
@@ -282,9 +283,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                     Log.e("fLongitude: ",slon);
                     Log.e("fMonth: ", smon);*/
 
+                    Log.e("Debug",String.valueOf(cropName.latitude)+" "+String.valueOf(lat)+
+                            " "+String.valueOf(cropName.longitude)+" "+String.valueOf(lon)+" "+String.valueOf(cropName.month)+
+                            " "+String.valueOf(mon));
+
                     if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
                         list.add(cropName);
-                        //Log.e("Debug","Reached inside");
+                        Log.e("Debug","Reached inside");
                     }
 
 
