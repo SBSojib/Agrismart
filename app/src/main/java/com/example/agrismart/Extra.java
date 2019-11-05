@@ -212,15 +212,17 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, NewTechnology.class));
-            }
+                Intent i = new Intent(Extra.this,NewTechnology.class);
+                i.putExtra("crop",name);
+                startActivity(i);            }
         });
         Button next4 = (Button) findViewById(R.id.progressButton);
         next4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, Progress.class));
-            }
+                Intent i = new Intent(Extra.this,Progress.class);
+                i.putExtra("crop",name);
+                startActivity(i);            }
         });
         Button next5 = (Button) findViewById(R.id.marketpriceButon);
         next5.setOnClickListener(new View.OnClickListener() {

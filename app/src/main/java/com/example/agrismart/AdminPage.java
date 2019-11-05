@@ -71,6 +71,8 @@ public class AdminPage extends AppCompatActivity {
         Button btn1= (Button)findViewById(R.id.addFileFert);
         Button btn2= (Button)findViewById(R.id.addFilePest);
         Button btn3= (Button)findViewById(R.id.addFilePrc);
+        Button btn4 = (Button)findViewById(R.id.addNewTechnology);
+        Button btn5 = (Button)findViewById(R.id.addFileProgress);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +133,18 @@ public class AdminPage extends AppCompatActivity {
                 selectPdf(3);
             }
         });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectPdf(4);
+            }
+        });
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectPdf(5);
+            }
+        });
     }
     private void selectPdf(int id) {
         Intent intent = new Intent();
@@ -139,6 +153,8 @@ public class AdminPage extends AppCompatActivity {
         if(id==1){startActivityForResult(Intent.createChooser(intent,"select txt file"),1);}
         if(id==2){startActivityForResult(Intent.createChooser(intent,"select txt file"),2);}
         if(id==3){startActivityForResult(Intent.createChooser(intent,"select txt file"),3);}
+        if(id==4){startActivityForResult(Intent.createChooser(intent,"select txt file"),4);}
+        if(id==5){startActivityForResult(Intent.createChooser(intent,"select txt file"),5);}
     }
 
     @Override
@@ -152,6 +168,12 @@ public class AdminPage extends AppCompatActivity {
         }
         if(requestCode==3 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             covertFile(data.getData(),3);
+        }
+        if(requestCode==4 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            covertFile(data.getData(),4);
+        }
+        if(requestCode==5 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            covertFile(data.getData(),5);
         }
     }
 
@@ -187,11 +209,15 @@ public class AdminPage extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         if(id==1){
-            mDatabase.child("Fertilizer").setValue(c);}
+            mDatabase.child("Fertilizer").child(nameCrop).setValue(c);}
         if(id==2){
-            mDatabase.child("Pesticide").setValue(c);}
+            mDatabase.child("Insecticide").child(nameCrop).setValue(c);}
         if(id==3){
-            mDatabase.child("Price").setValue(c);}
+            mDatabase.child("MarketPrice").child(nameCrop).setValue(c);}
+        if(id==4){
+            mDatabase.child("NewTechnology").child(nameCrop).setValue(c);}
+        if(id==5){
+            mDatabase.child("Progress").child(nameCrop).setValue(c);}
 
     }
 

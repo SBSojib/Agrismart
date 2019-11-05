@@ -28,7 +28,7 @@ public class Fertilizing extends Activity {
         final TextView view = (TextView)findViewById(R.id.plantDescrpText);
         Intent i =getIntent();
         final String name = i.getStringExtra("crop");
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Fertilizing");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Fertilizer");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
