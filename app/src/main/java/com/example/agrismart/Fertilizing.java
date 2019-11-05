@@ -9,52 +9,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class Fertilizing extends Activity {
+
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_description);
 
-        TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView view = (TextView)findViewById(R.id.plantDescrpText);
         Intent i =getIntent();
         final String name = i.getStringExtra("crop");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Fertilizer");
 
-        InputStream inputStream;
-        if(name.equals("Potato")){
-            inputStream=getResources().openRawResource(R.raw.potato_fert);
-        }
-        else if(name.equals("Tomato")){
-            inputStream=getResources().openRawResource(R.raw.tomato_fert);
-        }
-        else if(name.equals("Rice")){
-            inputStream=getResources().openRawResource(R.raw.rice_fert);
-        }
-        else if(name.equals("Wheat")){
-            inputStream=getResources().openRawResource(R.raw.wheat_fert);
-        }
-        else{
-            inputStream=getResources().openRawResource(R.raw.corn_fert);
-        }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        String myText = "";
-        int in;
-        try {
-            in = inputStream.read();
-            while (in != -1)
-            {
-                byteArrayOutputStream.write(in);
-                in = inputStream.read();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    CropPdf c = snap.getValue(CropPdf.class);
+                    if(c.getName().equals(name)){
+                        String text = c.getData();
+                        view.setText(name + "" +"Fertilizer");
+                        myTextView.setText(text);
+
+                    }
+                }
             }
-            inputStream.close();
 
-            myText = byteArrayOutputStream.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
-        myTextView.setText(myText);
+
     }
 
 }

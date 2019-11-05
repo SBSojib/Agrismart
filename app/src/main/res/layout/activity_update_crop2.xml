@@ -15,22 +15,35 @@
         android:fontFamily="sans-serif-black"/>
 
 
+
     <EditText
         android:layout_height="wrap_content"
-        android:layout_width="250dp"
-        android:id="@+id/Birthday"
-        android:clickable="true"
-        android:layout_marginLeft="70dp"
+        android:layout_width="80dp"
+        android:id="@+id/Day"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="200dp"
-        android:editable="false"
-        android:focusable="false"
-        android:hint="Date"/>
+        android:hint="Day"/>
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/Month"
+        android:layout_marginLeft="150dp"
+
+        android:layout_marginTop="200dp"
+        android:hint="Month"/>
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/Year"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="200dp"
+        android:hint="Year"/>
 
 
 
 
     <EditText
-        android:id="@+id/qtyText"
+        android:id="@+id/qtyTextEdit"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="300dp"
@@ -41,16 +54,16 @@
 
     <Spinner
         android:backgroundTint="@android:color/white"
-        android:id="@+id/spinner4"
+        android:id="@+id/spinnerEdit"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="300dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="190dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
     <Button
-        android:id="@+id/buttonOfConfirmingRegistration"
+        android:id="@+id/buttonOfConfirmUpdate"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="500dp"

@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,51 +19,38 @@ import java.io.InputStream;
 
 public class MarketPrice extends AppCompatActivity {
 
-    PDFView marketPricePdf;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_description);
 
-        TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView view = (TextView)findViewById(R.id.plantDescrpText);
         Intent i =getIntent();
         final String name = i.getStringExtra("crop");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("MarketPrice");
 
-        InputStream inputStream;
-        if(name.equals("Potato")){
-            inputStream=getResources().openRawResource(R.raw.potato_prc);
-        }
-        else if(name.equals("Tomato")){
-            inputStream=getResources().openRawResource(R.raw.tomato_prc);
-        }
-        else if(name.equals("Rice")){
-            inputStream=getResources().openRawResource(R.raw.rice_prc);
-        }
-        else if(name.equals("Wheat")){
-            inputStream=getResources().openRawResource(R.raw.wheat_prc);
-        }
-        else{
-            inputStream=getResources().openRawResource(R.raw.corn_prc);
-        }
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        String myText = "";
-        int in;
-        try {
-            in = inputStream.read();
-            while (in != -1)
-            {
-                byteArrayOutputStream.write(in);
-                in = inputStream.read();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    CropPdf c = snap.getValue(CropPdf.class);
+                    if(c.getName().equals(name)){
+                        String text = c.getData();
+                        view.setText(name + "" +"MarketPrice");
+                        myTextView.setText(text);
+                    }
+                }
             }
-            inputStream.close();
 
-            myText = byteArrayOutputStream.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
-        myTextView.setText(myText);
+
     }
 
 }

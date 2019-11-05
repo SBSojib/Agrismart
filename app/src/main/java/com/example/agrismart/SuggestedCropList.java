@@ -89,12 +89,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
         //TextView textViewDate = (TextView) findViewById(R.id.textView2);
-        String month="";
-        for(int i=0; ;i++) {
+        mon = calendar.get(Calendar.MONTH) + 1;
+        Log.e("CalenderMonth",String.valueOf(mon));
+        /*for(int i=0; ;i++) {
             if(currentDate.charAt(i) == '/') break;
             month += currentDate.charAt(i);
             mon = Integer.parseInt(month);
-        }
+        }*/
         //textViewDate.setText(month);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -110,67 +111,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 createLocationRequest();
             }
         }
-        //dataRetrive();
 
-        //Log.e("LatitudeS", String.valueOf(lat));
-        //Log.e("LatitudeS", String.valueOf(lon));
-/*
-        listView = (ListView) findViewById(R.id.listOfSuggestedCrops);
-        list = new ArrayList<>();
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Retreiving");
-        progressDialog.show();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("SuggestedCrops");
-        databaseReference.addValueEventListener((new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                list.clear();
-
-                for(DataSnapshot snap: dataSnapshot.getChildren()) {
-                    Crop2 cropName = snap.getValue(Crop2.class);
-
-                    String s1 = String.valueOf(lat);
-                    String s2 = String.valueOf(lon);
-                    Log.e("Latitude: ",s1);
-                    Log.e("Longitude: ",s2);
-
-                    String slat = String.valueOf((cropName.latitude));
-                    String slon = String.valueOf(cropName.longitude);
-                    String smon = String.valueOf(cropName.month);
-                    Log.e("fLatitude: ", slat);
-                    Log.e("fLongitude: ",slon);
-                    Log.e("fMonth: ", smon);
-
-                    if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
-                        list.add(cropName);
-                    }
-
-
-                    myAdapter = new MyAdapter2(SuggestedCropList.this, R.layout.items,list);
-                    listView.setAdapter(myAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        }));
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
-                Crop2 c=list.get(position);
-                System.out.println(c.getName());
-                intent.putExtra("pos",c.getName());
-                startActivity(intent);
-            }
-        });
-*/
     }
 
 
@@ -225,8 +166,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
             dataRetrive();
 
-            Log.e("Latitude in Display", String.valueOf(lat));
-            Log.e("Longitude in Diplay", String.valueOf(lon));
+            /*Log.e("Latitude in Display", String.valueOf(lat));
+            Log.e("Longitude in Display", String.valueOf(lon));*/
             //txtCoordinates.setText(lat + " / " + lon);
         }
         else {
@@ -332,8 +273,8 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
 
                     String s1 = String.valueOf(lat);
                     String s2 = String.valueOf(lon);
-                    Log.e("Latitude: ",s1);
-                    Log.e("Longitude: ",s2);
+                    /*Log.e("LatitudeFound: ",s1);
+                    Log.e("LongitudeFound: ",s2);*/
 
                     String slat = String.valueOf((cropName.latitude));
                     String slon = String.valueOf(cropName.longitude);
@@ -342,8 +283,13 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                     Log.e("fLongitude: ",slon);
                     Log.e("fMonth: ", smon);*/
 
+                    Log.e("Debug",String.valueOf(cropName.latitude)+" "+String.valueOf(lat)+
+                            " "+String.valueOf(cropName.longitude)+" "+String.valueOf(lon)+" "+String.valueOf(cropName.month)+
+                            " "+String.valueOf(mon));
+
                     if(cropName.latitude == lat && cropName.longitude == lon && cropName.month ==  mon) {
                         list.add(cropName);
+                        Log.e("Debug","Reached inside");
                     }
 
 
@@ -365,7 +311,7 @@ public class SuggestedCropList extends AppCompatActivity implements ConnectionCa
                 Intent intent = new Intent(SuggestedCropList.this,RegistrationInput.class);
                 Crop2 c=list.get(position);
                 System.out.println(c.getName());
-                intent.putExtra("pos",c.getName());
+                intent.putExtra("crop",c.getName());
                 startActivity(intent);
             }
         });

@@ -2,10 +2,16 @@ package com.example.agrismart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,35 +19,38 @@ import java.io.InputStream;
 
 public class NewTechnology extends AppCompatActivity {
 
-    PDFView newTechnologyPdf;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_description);
 
-        TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView myTextView = (TextView)findViewById(R.id.mytextview);
+        final TextView view = (TextView)findViewById(R.id.plantDescrpText);
+        Intent i =getIntent();
+        final String name = i.getStringExtra("crop");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("NewTechnology");
 
-        InputStream inputStream = getResources().openRawResource(R.raw.newt);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        String myText = "";
-        int in;
-        try {
-            in = inputStream.read();
-            while (in != -1)
-            {
-                byteArrayOutputStream.write(in);
-                in = inputStream.read();
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    CropPdf c = snap.getValue(CropPdf.class);
+                    if(c.getName().equals(name)){
+                        String text = c.getData();
+                        view.setText(name + "" +"NewTechnology");
+                        myTextView.setText(text);
+                    }
+                }
             }
-            inputStream.close();
 
-            myText = byteArrayOutputStream.toString();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
-        myTextView.setText(myText);
+
     }
 
 }
-
