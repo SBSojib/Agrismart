@@ -32,6 +32,14 @@ android:layout_height="fill_parent">
     android:layout_centerHorizontal="true"
     android:layout_marginTop="320dp"
     />
+    <Button
+        android:id="@+id/forgetpass"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="Forgot Password? Click here to reset it."
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="440dp"
+        ></Button>
 
 
 
