@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignIn extends AppCompatActivity {
 
     private EditText emailTV, passwordTV;
-    private Button loginBtn;
+    private Button loginBtn,frgtpass;
 
 
     private FirebaseAuth mAuth;
@@ -42,6 +42,16 @@ public class SignIn extends AppCompatActivity {
                 loginUserAccount();
             }
         });
+        frgtpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goTo();
+            }
+        });
+    }
+    private void goTo(){
+        Intent i = new Intent(SignIn.this,ResetPass.class);
+        startActivity(i);
     }
 
     private void loginUserAccount() {
@@ -88,6 +98,8 @@ public class SignIn extends AppCompatActivity {
                         }
                     }
                 });
+
+
     }
 
     private void initializeUI() {
@@ -95,6 +107,8 @@ public class SignIn extends AppCompatActivity {
         passwordTV = findViewById(R.id.passText);
 
         loginBtn = findViewById(R.id.signInConfirmButton);
+        frgtpass=findViewById(R.id.forgetpass);
 
     }
+
 }
