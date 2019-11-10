@@ -52,7 +52,7 @@ public class SignIn extends AppCompatActivity {
     private void goTo(){
 
 
-                String email = emailTV.getText().toString().trim();
+                String email = emailTV.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
