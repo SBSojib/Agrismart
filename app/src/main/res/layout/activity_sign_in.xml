@@ -45,7 +45,6 @@ android:layout_height="fill_parent">
     ></Button>
 
 
-
 <Button
     android:background="@drawable/rounded_button"
     android:text="Sign In"
