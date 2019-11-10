@@ -3,6 +3,7 @@ package com.example.agrismart;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,6 +35,9 @@ public class ResetPass extends AppCompatActivity {
                     return;
                 }
 
+                startActivity(new Intent(ResetPass.this, SignIn.class));
+                finish();
+
                 mAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -45,6 +49,7 @@ public class ResetPass extends AppCompatActivity {
                                 }
                             }
                         });
+
             }
         });
     }
