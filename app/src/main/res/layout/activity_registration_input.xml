@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/earthybackground">
+    android:orientation="vertical"
+    android:background="@drawable/earthybackground"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <TextView
         android:layout_width="match_parent"
@@ -51,17 +52,16 @@
 
     <Button
         android:id="@+id/buttonOfConfirmingRegistration"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginTop="500dp"
         android:layout_marginLeft="70dp"
+        android:layout_marginTop="500dp"
         android:background="@drawable/rounded_button"
-        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#FFFFFF"
         android:text="Confirm"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:backgroundTint="#FFFFFF"
-        ></Button>
-
+        android:textSize="20dp"></Button>
 
 
 
