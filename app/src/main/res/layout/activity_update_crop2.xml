@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/earthybackground">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Insert Data"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-black"/>
+
+
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/Day"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="200dp"
+        android:hint="Day"/>
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/Month"
+        android:layout_marginLeft="150dp"
+
+        android:layout_marginTop="200dp"
+        android:hint="Month"/>
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/Year"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="200dp"
+        android:hint="Year"/>
+
+
+
+
+    <EditText
+        android:id="@+id/qtyTextEdit"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        android:inputType="number"
+        android:hint="Field Size"
+        android:layout_marginLeft="70dp"
+        ></EditText>
+
+    <Spinner
+        android:backgroundTint="@android:color/white"
+        android:id="@+id/spinnerEdit"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="190dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
+
+    <Button
+        android:id="@+id/buttonOfConfirmUpdate"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="70dp"
+        android:background="@drawable/rounded_button"
+        android:textSize="20dp"
+        android:text="Confirm"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:backgroundTint="#FFFFFF"
+        ></Button>
+
+
+
+
+</RelativeLayout>

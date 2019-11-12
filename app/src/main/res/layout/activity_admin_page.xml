@@ -1,3 +1,4 @@
+ 
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -166,6 +167,22 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="Price" />
+        <Button
+            android:background="@drawable/rounded_button"
+            android:id="@+id/addNewTechnology"
+            android:layout_width="154dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="New Technology" />
+        <Button
+            android:background="@drawable/rounded_button"
+            android:id="@+id/addFileProgress"
+            android:layout_width="154dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Progress" />
 
         <Button
             android:background="@drawable/rounded_button"

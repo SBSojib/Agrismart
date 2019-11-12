@@ -212,15 +212,17 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
         next3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, NewTechnology.class));
-            }
+                Intent i = new Intent(Extra.this,NewTechnology.class);
+                i.putExtra("crop",name);
+                startActivity(i);            }
         });
         Button next4 = (Button) findViewById(R.id.progressButton);
         next4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Extra.this, Progress.class));
-            }
+                Intent i = new Intent(Extra.this,Progress.class);
+                i.putExtra("crop",name);
+                startActivity(i);            }
         });
         Button next5 = (Button) findViewById(R.id.marketpriceButon);
         next5.setOnClickListener(new View.OnClickListener() {
@@ -247,14 +249,12 @@ public class Extra extends AppCompatActivity implements ConnectionCallbacks,
 
     public  void getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
-        String currentDate = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
-        String[] words=currentDate.split("/");
-        String monthS = words[0];
-        String dayS = words[1];
-        String yearDS = words[2];
-        presentMonth = Integer.parseInt(monthS);
-        presentDay = Integer.parseInt(dayS);
-        presentYear = Integer.parseInt(yearDS);
+
+        presentMonth =calendar.get(Calendar.MONTH) + 1;
+        presentYear = calendar.get(Calendar.YEAR);
+        presentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        presentYear = presentYear%2000;
+
     }
 
     public void getDayDifference () {

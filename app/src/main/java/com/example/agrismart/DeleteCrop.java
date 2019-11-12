@@ -1,18 +1,17 @@
 package com.example.agrismart;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
-import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,12 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class MyCrops extends AppCompatActivity {
+public class DeleteCrop extends AppCompatActivity {
+
     ListView listView;
     List<Crop> list;
     ProgressDialog progressDialog;
@@ -38,31 +36,17 @@ public class MyCrops extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_crops_list);
+        setContentView(R.layout.activity_delete_crop);
 
-        listView = (ListView) findViewById(R.id.list2);
+        listView = (ListView) findViewById(R.id.list3);
 
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Retreiving...");
         progressDialog.show();
-        Button btn1=(Button)findViewById(R.id.updateCrop);
-        Button btn2=(Button)findViewById(R.id.deleteCrop);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent i= new Intent(MyCrops.this,DeleteCrop.class);
-                startActivity(i);
-            }
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent i= new Intent(MyCrops.this,UpdateCrop.class);
-                startActivity(i);
-            }
-        });
-        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Button btn =(Button)findViewById(R.id.confirmDeleteCrop);
+
+        final String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("crops").child(currentuser);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -75,7 +59,7 @@ public class MyCrops extends AppCompatActivity {
                     Crop c = snap.getValue(Crop.class);
                     list.add(c);
 
-                    myAdapter = new MyAdapter(MyCrops.this,R.layout.items,list);
+                    myAdapter = new MyAdapter(DeleteCrop.this,R.layout.items,list);
                     listView.setAdapter(myAdapter);
                 }
             }
@@ -88,15 +72,36 @@ public class MyCrops extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MyCrops.this,Extra.class);
                 Crop c=list.get(position);
-                selectedCropName = c.getName();
-                Log.e("Name",selectedCropName);
-                System.out.println(listView.getItemAtPosition(position).toString());
-                intent.putExtra("crname",c.getName());
-                intent.putExtra("plantingDay",c.getDateDay());
-                intent.putExtra("plantingMonth",c.getDateMonth());
-                intent.putExtra("plantingYear",c.getDateYear());
+                selectedCropName = c.getName() + " " + c.getDateDay()+ " " + c.getDateMonth()+ " " + c.getDateYear();
+                final DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().getRoot().child("crops").child(currentuser).child(selectedCropName);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DeleteCrop.this);
+                builder.setTitle("Are you you want to delete this?");
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setMessage("This change is permanent")
+                        .setCancelable(false)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dbNode.setValue(null);
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+            }
+        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DeleteCrop.this,MyCrops.class);
                 startActivity(intent);
             }
         });

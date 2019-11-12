@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignIn extends AppCompatActivity {
 
     private EditText emailTV, passwordTV;
-    private Button loginBtn;
+    private Button loginBtn,frgtpass;
 
 
     private FirebaseAuth mAuth;
@@ -42,6 +42,36 @@ public class SignIn extends AppCompatActivity {
                 loginUserAccount();
             }
         });
+        frgtpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goTo();
+            }
+        });
+    }
+    private void goTo(){
+
+
+                String email = emailTV.getText().toString();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Enter your email!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(SignIn.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignIn.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
     }
 
     private void loginUserAccount() {
@@ -88,6 +118,8 @@ public class SignIn extends AppCompatActivity {
                         }
                     }
                 });
+
+
     }
 
     private void initializeUI() {
@@ -95,6 +127,8 @@ public class SignIn extends AppCompatActivity {
         passwordTV = findViewById(R.id.passText);
 
         loginBtn = findViewById(R.id.signInConfirmButton);
+        frgtpass=findViewById(R.id.forgetpass);
 
     }
+
 }
