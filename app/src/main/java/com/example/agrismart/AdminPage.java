@@ -118,31 +118,56 @@ public class AdminPage extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPdf(1);
+                String nameCrop=name.getText().toString();
+                if (nameCrop != null && !nameCrop.isEmpty()) {
+                    selectPdf(1);}
+                else{
+                    Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPdf(2);
+                String nameCrop=name.getText().toString();
+                if (nameCrop != null && !nameCrop.isEmpty()) {
+                    selectPdf(2);}
+                else{
+                    Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPdf(3);
+                String nameCrop=name.getText().toString();
+                if (nameCrop != null && !nameCrop.isEmpty()) {
+                    selectPdf(3);}
+                else{
+                    Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPdf(4);
+                String nameCrop=name.getText().toString();
+                if (nameCrop != null && !nameCrop.isEmpty()) {
+                    selectPdf(4);}
+                else{
+                    Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+                }
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPdf(5);
+                String nameCrop=name.getText().toString();
+                if (nameCrop != null && !nameCrop.isEmpty()) {
+                    selectPdf(5);}
+                else{
+                    Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -150,11 +175,29 @@ public class AdminPage extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("text/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        if(id==1){startActivityForResult(Intent.createChooser(intent,"select txt file"),1);}
-        if(id==2){startActivityForResult(Intent.createChooser(intent,"select txt file"),2);}
-        if(id==3){startActivityForResult(Intent.createChooser(intent,"select txt file"),3);}
-        if(id==4){startActivityForResult(Intent.createChooser(intent,"select txt file"),4);}
-        if(id==5){startActivityForResult(Intent.createChooser(intent,"select txt file"),5);}
+        String nameCrop=name.getText().toString();
+        if (nameCrop != null && !nameCrop.isEmpty()) {
+            if (id == 1) {
+                startActivityForResult(Intent.createChooser(intent, "select txt file"), 1);
+            }
+            if (id == 2) {
+                startActivityForResult(Intent.createChooser(intent, "select txt file"), 2);
+            }
+            if (id == 3) {
+                startActivityForResult(Intent.createChooser(intent, "select txt file"), 3);
+            }
+            if (id == 4) {
+                startActivityForResult(Intent.createChooser(intent, "select txt file"), 4);
+            }
+            if (id == 5) {
+                startActivityForResult(Intent.createChooser(intent, "select txt file"), 5);
+            }
+
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Add name first!", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -208,16 +251,22 @@ public class AdminPage extends AppCompatActivity {
 // ...
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if(id==1){
-            mDatabase.child("Fertilizer").child(nameCrop).setValue(c);}
-        if(id==2){
-            mDatabase.child("Insecticide").child(nameCrop).setValue(c);}
-        if(id==3){
-            mDatabase.child("MarketPrice").child(nameCrop).setValue(c);}
-        if(id==4){
-            mDatabase.child("NewTechnology").child(nameCrop).setValue(c);}
-        if(id==5){
-            mDatabase.child("Progress").child(nameCrop).setValue(c);}
+
+        if (id == 1) {
+            mDatabase.child("Fertilizer").child(nameCrop).setValue(c);
+        }
+        if (id == 2) {
+            mDatabase.child("Insecticide").child(nameCrop).setValue(c);
+        }
+        if (id == 3) {
+            mDatabase.child("MarketPrice").child(nameCrop).setValue(c);
+        }
+        if (id == 4) {
+            mDatabase.child("NewTechnology").child(nameCrop).setValue(c);
+        }
+        if (id == 5) {
+            mDatabase.child("Progress").child(nameCrop).setValue(c);
+        }
 
     }
 
