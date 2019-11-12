@@ -144,6 +144,7 @@
             android:background="@android:color/white" />
         <Button
             android:background="@drawable/rounded_button"
+            android:backgroundTint="@android:color/white"
             android:id="@+id/addFileFert"
             android:layout_width="154dp"
             android:layout_height="40dp"
@@ -152,6 +153,7 @@
             android:text="Fertilizer" />
         <Button
             android:background="@drawable/rounded_button"
+            android:backgroundTint="@android:color/white"
             android:id="@+id/addFilePest"
             android:layout_width="154dp"
             android:layout_height="40dp"
@@ -161,6 +163,7 @@
         <Button
             android:background="@drawable/rounded_button"
             android:id="@+id/addFilePrc"
+            android:backgroundTint="@android:color/white"
             android:layout_width="154dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
@@ -169,6 +172,7 @@
         <Button
             android:background="@drawable/rounded_button"
             android:id="@+id/addNewTechnology"
+            android:backgroundTint="@android:color/white"
             android:layout_width="154dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
@@ -177,6 +181,7 @@
         <Button
             android:background="@drawable/rounded_button"
             android:id="@+id/addFileProgress"
+            android:backgroundTint="@android:color/white"
             android:layout_width="154dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
@@ -186,6 +191,7 @@
         <Button
             android:background="@drawable/rounded_button"
             android:id="@+id/addcrop"
+            android:backgroundTint="@android:color/white"
             android:layout_width="154dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
