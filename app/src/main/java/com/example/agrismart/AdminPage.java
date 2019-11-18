@@ -218,6 +218,8 @@ public class AdminPage extends AppCompatActivity {
         if(requestCode==5 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             covertFile(data.getData(),5);
         }
+        Toast.makeText(getApplicationContext(), "File has been added", Toast.LENGTH_LONG).show();
+
     }
 
 
