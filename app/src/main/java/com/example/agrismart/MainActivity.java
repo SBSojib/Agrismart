@@ -41,13 +41,25 @@ public class MainActivity extends AppCompatActivity {
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String currentuser="";
+                try {
+                    currentuser = currentuser + FirebaseAuth.getInstance().getCurrentUser().getUid();
+                }
+                catch (Exception e){
 
-                startActivity(new Intent(MainActivity.this, SignIn.class));
+                }
+                if(!currentuser.equals("")){
+                    startActivity(new Intent(MainActivity.this, Menu.class));
 
-                finish();
+                    }
+                else{
+                    startActivity(new Intent(MainActivity.this, SignIn.class));
+
+                }
 
 
             }
