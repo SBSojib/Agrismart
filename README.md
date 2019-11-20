@@ -21,6 +21,7 @@ The project is for helping the farmer in farming. It will guide the farmer day t
 	- It will say which day to fertilize the crops and give insecticide.
 	- And if the crops is not planted yet, then it will tell when it will be planted and if 	the cultivation period is over it will also tell that.
 	- Here it has 5 buttons for every kind of details of the crops.
+	
 		- Fertilizer: contains every information about fertilizer.
 		- Insecticide: contains every information about Insecticide.
 		- Progress: contains information about the progress in cultivation period.
