@@ -38,9 +38,19 @@ public class Fertilizing extends Activity {
                     CropPdf c = snap.getValue(CropPdf.class);
                     if(c.getName().equals(name)){
                         String text = c.getData();
-                        view.setText(name + "" +"Fertilizer");
-                        myTextView.setText(text);
-
+                        String build="";
+                        for(int i=0;i<text.length();i++){
+                            char et=text.charAt(i);
+                            if(et=='#'){
+                                build=build+System.lineSeparator()+System.lineSeparator();
+                                i++;
+                            }
+                            else{
+                                build=build+et;
+                            }
+                        }
+                        view.setText(name + " " +"Ferilizer");
+                        myTextView.setText(build);
                     }
                 }
             }
