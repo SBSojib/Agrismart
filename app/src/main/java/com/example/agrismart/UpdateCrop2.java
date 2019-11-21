@@ -64,6 +64,7 @@ public class UpdateCrop2 extends AppCompatActivity {
                 dbNode.setValue(c);
                 Intent i=new Intent(UpdateCrop2.this,MyCrops.class);
                 startActivity(i);
+                finish();
             }
         });
 

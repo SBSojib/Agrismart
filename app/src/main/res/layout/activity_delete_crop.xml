@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Select Crop to be Deleted"
+        android:text="Select Crop To Be Deleted"
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -32,9 +32,8 @@
     <Button
         android:id="@+id/confirmDeleteCrop"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:text="Finish"
-        android:background="@drawable/rounded_button"
         android:backgroundTint="@android:color/white"
         android:layout_gravity="center_horizontal"
         ></Button>

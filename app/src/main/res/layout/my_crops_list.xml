@@ -34,6 +34,7 @@
 
             android:backgroundTint="@android:color/white"
             android:id="@+id/updateCrop"
+            android:layout_marginBottom="1dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Delete Crop" />
@@ -42,6 +43,7 @@
             android:background="@android:color/white"
             android:id="@+id/deleteCrop"
             android:layout_width="match_parent"
+            android:layout_marginBottom="1dp"
             android:layout_height="40dp"
             android:text="Update Crop" />
 

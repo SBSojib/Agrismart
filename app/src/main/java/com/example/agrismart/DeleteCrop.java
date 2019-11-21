@@ -103,6 +103,7 @@ public class DeleteCrop extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DeleteCrop.this,MyCrops.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
