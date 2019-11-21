@@ -48,6 +48,7 @@ package com.example.agrismart;
  import com.google.android.gms.location.LocationRequest;
  import com.google.android.gms.location.LocationServices;
  import com.google.android.gms.location.LocationListener;
+ import com.google.firebase.auth.FirebaseAuth;
  import com.google.firebase.database.DataSnapshot;
  import com.google.firebase.database.DatabaseError;
  import com.google.firebase.database.DatabaseReference;
@@ -149,7 +150,22 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
                 startActivity(new Intent(Menu.this, MyCrops.class));
             }
         });
+        Button btn = (Button) findViewById(R.id.logOut);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
 
+                startActivity(new Intent(Menu.this, SignIn.class));
+            }
+        });
+        Button next2 = (Button) findViewById(R.id.browseCrops);
+        next2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Menu.this, BrowseCrop.class));
+            }
+        });
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
