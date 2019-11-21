@@ -53,7 +53,9 @@ First Install the app in your android phone, open it and then follow below:
  -  Then go to ‘Suggested Crops’ or ‘All Crops’, ‘Suggested Crops’ is recommended cause it gives suggestion of crops according to your location and current season.
  - Register for a crops from there.
  - Then in ‘My Crops’ find your registered crops, click on a particular crops to get every details of it.
+ - In case you want to see the crop details before registration, then go to browse crops.
  - In the Crop details page, use the 5 buttons for more details and this page will directly contain the weather information, analysis and suggestions for you.
+ - If you are a admin the sign as a admin and giving the required data, you can add a new crop.
  
 
 ## Demo Video
