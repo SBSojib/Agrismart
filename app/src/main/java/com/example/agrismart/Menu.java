@@ -246,7 +246,7 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
         }
 
     }
-
+/*
     @Override
     public void onBackPressed() {
 
@@ -268,7 +268,7 @@ public class Menu extends AppCompatActivity implements ConnectionCallbacks,
         AlertDialog alert = builder.create();
         alert.show();
 
-    }
+    }*/
 
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
