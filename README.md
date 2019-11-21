@@ -57,7 +57,7 @@ First Install the app in your android phone, open it and then follow below:
  
 
 ## Demo Video
-* [Agrismart](https://github.com/SBSojib/Agrismart) - Demo video of this project
+* [Agrismart](https://youtu.be/colyizTKl64) - Demo video of this project
 
 ## Conclusions
 This is the first project we have done which is not only for marks. Well, marks was the vital part obviously. We wanted it to be useful too. But deep down, we have a little bad feeling, maybe we lost the usefulness of the application a little in satisfying the marks. So right now I can’t say that I am totally satisfied though we fulfilled our requirements and completed the application almost as we wanted in the beginning.
